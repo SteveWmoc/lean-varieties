@@ -21,6 +21,8 @@ The implementation is deliberately thin: varieties form the full subcategory of
 
 namespace LeanVarieties
 
+noncomputable section
+
 open CategoryTheory
 open AlgebraicGeometry
 
@@ -75,7 +77,9 @@ def mk (X : Over (baseScheme k)) [LocallyOfFiniteType X.hom]
 /-- Construct a variety directly from a scheme and a structural morphism to `Spec k`. -/
 def ofScheme (X : Scheme.{u}) (f : X ⟶ baseScheme k) [LocallyOfFiniteType f]
     [QuasiCompact f] [IsSeparated f] : Variety k :=
-  mk (Over.mk f)
+  ⟨Over.mk f, by
+    change LocallyOfFiniteType f ∧ QuasiCompact f ∧ IsSeparated f
+    exact ⟨inferInstance, inferInstance, inferInstance⟩⟩
 
 /-- The inclusion of varieties into schemes over `Spec k`. -/
 abbrev inclusion (k : Type u) [Field k] : Variety k ⥤ Over (baseScheme k) :=
@@ -89,5 +93,7 @@ abbrev forget (k : Type u) [Field k] : Variety k ⥤ Scheme.{u} :=
 lemma forget_obj (X : Variety k) : (forget k).obj X = X.toScheme := rfl
 
 end Variety
+
+end
 
 end LeanVarieties
