@@ -1,6 +1,6 @@
 # ADR 0001: Semantic scope of `Variety`
 
-**Status:** Proposed
+**Status:** Accepted
 
 ## Context
 
@@ -8,11 +8,11 @@ The long-term motivation for this project is to support formal statements and la
 
 The word *variety* is convention-dependent: some sources require irreducibility and reducedness, while others allow reducible varieties or use the term more broadly. That ambiguity should not be hidden inside the API.
 
-## Proposed convention
+## Convention
 
-For this project, `Variety k` will mean a separated scheme of finite type over `Spec k`, where `k` is a field.
+For this project, `Variety k` means a separated scheme of finite type over `Spec k`, where `k` is a field.
 
-Reducedness, irreducibility, integrality, smoothness, properness, and projectivity are to remain explicit orthogonal properties rather than fields silently built into the word `Variety`.
+Reducedness, irreducibility, integrality, smoothness, properness, and projectivity remain explicit orthogonal properties rather than fields silently built into the word `Variety`.
 
 Thus the intended hierarchy is conceptually:
 
@@ -26,28 +26,36 @@ Scheme
 
 This is a project convention, not a claim that this is the unique standard mathematical definition of *variety*.
 
-## Representation principle
+## Representation decision
 
-`Variety k` should be a thin abstraction over mathlib's scheme-theoretic API. In particular:
+`Variety k` is implemented as a full subcategory of mathlib's `Over (Spec k)`.
+The object property requires the structural morphism to be:
+
+- `LocallyOfFiniteType`;
+- `QuasiCompact`;
+- `IsSeparated`.
+
+The first two conditions together are the scheme-theoretic finite-type condition used by mathlib. This representation has several consequences by construction:
 
 - the underlying object remains a mathlib `Scheme`;
-- the structure morphism to `Spec k` should reuse mathlib's over-category machinery where practical;
-- finite type and separatedness should reuse mathlib's existing morphism predicates;
-- morphisms of varieties should ultimately be morphisms over `Spec k`, not independent hand-written data;
-- standard constructions should delegate to scheme constructions and inherit their proofs whenever possible.
+- the structure morphism is the morphism already stored by the over-category object;
+- morphisms of varieties are automatically morphisms over `Spec k`;
+- identities and composition are inherited from the full-subcategory/category machinery;
+- the defining morphism properties can be exposed as instances without duplicating their definitions.
 
-No new foundational notion should be introduced merely for ergonomic convenience if mathlib already has the corresponding scheme-theoretic structure.
+No new foundational notion is introduced merely for ergonomic convenience when mathlib already supplies the corresponding scheme-theoretic structure.
 
 ## Initial API goals
 
-The first implementation phase after this ADR should provide only enough API to make the abstraction pleasant to use:
+The first implementation phase provides only enough API to make the abstraction pleasant to use:
 
 1. a representation of `Variety k`;
 2. access to its underlying `Scheme` and structural morphism;
 3. morphisms over the base field;
-4. basic coercions/extensionality lemmas as actually needed;
-5. standard examples beginning with affine space;
-6. explicit predicates or instances for properties such as smoothness and properness where mathlib already supplies them.
+4. constructors from over-category objects and structural morphisms;
+5. inherited instances for the defining properties.
+
+Standard examples, beginning with affine space, are deferred to the next phase so that the core representation can be validated independently.
 
 Projective space and a projectivity API should be added only after inspecting what current mathlib already exposes around `Proj` and proper morphisms.
 
@@ -65,6 +73,6 @@ The following are deliberately postponed:
 
 These should be introduced only when a downstream requirement makes the needed interface clear.
 
-## Exit criterion for the next phase
+## Exit criterion
 
-A successful first API PR should make it possible to construct and manipulate a `Variety k` without exposing unnecessary scheme plumbing, while retaining a transparent path back to the underlying mathlib objects. It should not yet attempt to solve projectivity, dimension, or Hodge-theoretic infrastructure.
+The core API should make it possible to construct and manipulate a `Variety k` without exposing unnecessary scheme plumbing, while retaining a transparent path back to the underlying mathlib objects. It should not yet attempt to solve projectivity, dimension, or Hodge-theoretic infrastructure.
