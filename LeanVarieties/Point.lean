@@ -35,7 +35,7 @@ instance point_isSmooth : (point k).IsSmooth := by
   infer_instance
 
 instance point_isProper : (point k).IsProper := by
-  change IsProper (𝟙 (baseScheme k))
+  change AlgebraicGeometry.IsProper (𝟙 (baseScheme k))
   infer_instance
 
 end Variety
