@@ -58,6 +58,9 @@ instance (n : ℕ) : LocallyOfFinitePresentation (affineSpace (k := k) n).struct
 
 /-- Affine `n`-space is smooth over its base field. -/
 instance affineSpace_isSmooth (n : ℕ) : (affineSpace (k := k) n).IsSmooth := by
+  letI : MorphismProperty.RespectsIso (@AlgebraicGeometry.Smooth.{u}) := by
+    rw [HasRingHomProperty.eq_affineLocally (P := @AlgebraicGeometry.Smooth.{u})]
+    exact affineLocally_respectsIso _ RingHom.Smooth.respectsIso
   change Smooth ((affineScheme k n) ↘ baseScheme k)
   rw [← MorphismProperty.cancel_left_of_respectsIso (P := @Smooth)
       (AlgebraicGeometry.AffineSpace.SpecIso (ULift.{u} (Fin n)) (.of k)).inv,

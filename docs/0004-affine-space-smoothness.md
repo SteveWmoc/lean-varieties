@@ -28,8 +28,11 @@ The proof uses the pinned mathlib v4.33.0 definitions throughout:
    `Algebra.Smooth`.
 
 Smoothness is transported across the scheme isomorphism using
-`MorphismProperty.cancel_left_of_respectsIso`. No new axiom or definition of
-smoothness is introduced.
+`MorphismProperty.cancel_left_of_respectsIso`. A local instance obtains this
+isomorphism invariance from `HasRingHomProperty.eq_affineLocally` and
+`RingHom.Smooth.respectsIso`; it does not depend on automatic discovery of
+that instance in the pinned API. No new axiom or definition of smoothness is
+introduced.
 
 ## API and scope
 
