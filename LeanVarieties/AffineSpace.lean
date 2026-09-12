@@ -1,4 +1,4 @@
-import LeanVarieties.Basic
+import LeanVarieties.Properties
 import Mathlib.AlgebraicGeometry.AffineSpace
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
@@ -11,6 +11,10 @@ This file provides the first standard example for the varieties API: affine
 Mathlib indexes affine-space coordinates by a type in the same universe as the
 base scheme. For a natural-number dimension `n`, we therefore use
 `ULift (Fin n)` as the coordinate index type.
+
+Affine space is smooth: its structural morphism identifies, through mathlib's
+`AffineSpace.SpecIso`, with the spectrum map of the polynomial algebra. Formal
+smoothness and finite presentation of that algebra supply the required proof.
 -/
 
 namespace LeanVarieties
@@ -51,6 +55,17 @@ instance (n : ℕ) : IsAffineHom (affineSpace (k := k) n).structureMap := by
 instance (n : ℕ) : LocallyOfFinitePresentation (affineSpace (k := k) n).structureMap := by
   change LocallyOfFinitePresentation ((affineScheme k n) ↘ baseScheme k)
   infer_instance
+
+/-- Affine `n`-space is smooth over its base field. -/
+instance affineSpace_isSmooth (n : ℕ) : (affineSpace (k := k) n).IsSmooth := by
+  change Smooth ((affineScheme k n) ↘ baseScheme k)
+  rw [← MorphismProperty.cancel_left_of_respectsIso (P := @Smooth)
+      (AlgebraicGeometry.AffineSpace.SpecIso (ULift.{u} (Fin n)) (.of k)).inv,
+    AlgebraicGeometry.AffineSpace.SpecIso_inv_over,
+    HasRingHomProperty.Spec_iff (P := @Smooth)]
+  change RingHom.Smooth (algebraMap k (MvPolynomial (ULift.{u} (Fin n)) k))
+  rw [RingHom.smooth_algebraMap]
+  exact ⟨inferInstance, inferInstance⟩
 
 end Variety
 
