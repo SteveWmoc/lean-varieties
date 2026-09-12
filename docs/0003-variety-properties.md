@@ -24,7 +24,7 @@ turnkey general projective-morphism API has not been identified in the pinned
 4.33.0 surface. Projectivity will therefore be designed separately rather than
 silently conflated with properness.
 
-Likewise, this PR does not claim affine space is smooth in our API. That fact is
-mathematically standard, but the pinned affine-space module does not export a
-ready-made `Smooth` instance, so it should be proved explicitly in a later
-slice if and when the required polynomial-ring smoothness bridge is clear.
+PR #4 deferred the proof that affine space is smooth because the pinned
+mathlib affine-space module does not export a ready-made `Smooth` instance.
+PR #5 supplies the polynomial-algebra bridge; see
+[the affine-space smoothness note](0004-affine-space-smoothness.md).
