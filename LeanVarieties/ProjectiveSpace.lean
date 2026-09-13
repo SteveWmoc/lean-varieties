@@ -53,7 +53,8 @@ def degreeZeroEquiv : k ≃+* (grading k n 0) :=
       apply Subtype.ext
       change MvPolynomial.C (p.1.coeff 0) = p.1
       exact (MvPolynomial.totalDegree_eq_zero_iff_eq_C.mp
-        (MvPolynomial.totalDegree_zero_iff_isHomogeneous.mpr p.2)).symm)
+        ((MvPolynomial.totalDegree_zero_iff_isHomogeneous
+          (ULift.{u} (Fin (n + 1)))).mpr p.2)).symm)
 
 @[simp]
 lemma degreeZeroEquiv_apply (a : k) :
@@ -72,7 +73,8 @@ lemma degreeZeroSpecIso_hom :
 instance coordinateRing_finiteType :
     Algebra.FiniteType (grading k n 0) (CoordinateRing k n) := by
   let : IsScalarTower k (grading k n 0) (CoordinateRing k n) :=
-    IsScalarTower.of_algebraMap_eq fun _ => rfl
+    IsScalarTower.of_algebraMap_eq (R := k) (S := grading k n 0)
+      (A := CoordinateRing k n) fun _ => rfl
   exact Algebra.FiniteType.of_restrictScalars_finiteType
     k (grading k n 0) (CoordinateRing k n)
 
