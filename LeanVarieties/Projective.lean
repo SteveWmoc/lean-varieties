@@ -55,8 +55,10 @@ instance (priority := 100) IsProjective.isProper (X : Variety k) [X.IsProjective
 /-- Projective space is projective via its identity closed immersion. -/
 instance projectiveSpace_isProjective (n : ℕ) :
     (projectiveSpace (k := k) n).IsProjective := by
-  refine ⟨n, 𝟙 (projectiveScheme k n), inferInstance, ?_⟩
-  exact Category.id_comp _
+  refine ⟨n, 𝟙 (projectiveScheme k n), ?_, ?_⟩
+  · change IsClosedImmersion (𝟙 (projectiveScheme k n))
+    infer_instance
+  · exact Category.id_comp _
 
 /-- Projectivity as an object property on varieties. -/
 def projectiveProperty (k : Type u) [Field k] : ObjectProperty (Variety k) :=
