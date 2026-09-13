@@ -3,3 +3,4 @@ import LeanVarieties.Properties
 import LeanVarieties.Point
 import LeanVarieties.AffineSpace
 import LeanVarieties.ProjectiveSpace
+import LeanVarieties.Projective
