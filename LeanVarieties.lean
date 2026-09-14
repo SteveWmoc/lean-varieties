@@ -4,3 +4,4 @@ import LeanVarieties.Point
 import LeanVarieties.AffineSpace
 import LeanVarieties.ProjectiveSpace
 import LeanVarieties.Projective
+import LeanVarieties.ProjectiveCharts
