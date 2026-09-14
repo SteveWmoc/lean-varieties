@@ -43,7 +43,9 @@ The file also exposes `isAffineOpen_coordinateOpen`, the open immersion
 
 The chart ring's `k`-algebra structure is the composite of the coefficient
 map into the degree-zero ring and its map into the homogeneous localization.
-An `IsScalarTower` instance records that compatibility.
+The algebra structure retains mathlib's existing scalar action on homogeneous
+fractions. An `IsScalarTower` instance records compatibility with the
+degree-zero ring.
 
 The structural morphism `chartStructureMap` is `Spec.map` of this coefficient
 map. The theorem `chartι_structureMap` proves

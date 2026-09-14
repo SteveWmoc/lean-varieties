@@ -41,6 +41,7 @@ lemma irrelevant_eq_span_coordinates :
   · rw [HomogeneousIdeal.toIdeal_irrelevant_le]
     intro d hd p hp
     have hp' : p.IsHomogeneous d := hp
+    change p ∈ MvPolynomial.idealOfVars (ULift.{u} (Fin (n + 1))) k
     have hmem : p ∈ MvPolynomial.idealOfVars (ULift.{u} (Fin (n + 1))) k ^ 1 := by
       rw [MvPolynomial.mem_pow_idealOfVars_iff']
       intro m hm
@@ -73,9 +74,17 @@ abbrev ChartRing (i : ULift.{u} (Fin (n + 1))) : Type u :=
 
 /-- The coefficient field acts on each chart ring through the degree-zero ring. -/
 instance chartRingAlgebra (i : ULift.{u} (Fin (n + 1))) :
-    Algebra k (ChartRing k n i) :=
-  ((algebraMap (grading k n 0) (ChartRing k n i)).comp
-    (algebraMap k (grading k n 0))).toAlgebra
+    Algebra k (ChartRing k n i) where
+  smul := (· • ·)
+  algebraMap := (algebraMap (grading k n 0) (ChartRing k n i)).comp
+    (algebraMap k (grading k n 0))
+  commutes' _ _ := mul_comm _ _
+  smul_def' r x := by
+    apply HomogeneousLocalization.val_injective (Submonoid.powers (coordinate k n i))
+    rw [HomogeneousLocalization.val_smul, HomogeneousLocalization.val_mul]
+    change r • x.val =
+      Localization.mk (algebraMap k (CoordinateRing k n) r) 1 * x.val
+    rw [Localization.mk_algebraMap, Algebra.smul_def]
 
 /-- The chart's field structure agrees with its degree-zero ring structure. -/
 instance chartRing_isScalarTower (i : ULift.{u} (Fin (n + 1))) :
