@@ -81,10 +81,12 @@ instance chartRingAlgebra (i : ULift.{u} (Fin (n + 1))) :
   commutes' _ _ := mul_comm _ _
   smul_def' r x := by
     apply HomogeneousLocalization.val_injective (Submonoid.powers (coordinate k n i))
-    rw [HomogeneousLocalization.val_smul, HomogeneousLocalization.val_mul]
-    change r • x.val =
+    rw [HomogeneousLocalization.val_mul]
+    change (r • x).val =
       Localization.mk (algebraMap k (CoordinateRing k n) r) 1 * x.val
-    rw [Localization.mk_algebraMap, Algebra.smul_def]
+    rw [Localization.mk_algebraMap, ← Algebra.smul_def]
+    exact HomogeneousLocalization.val_smul
+      (𝒜 := grading k n) (Submonoid.powers (coordinate k n i)) r x
 
 /-- The chart's field structure agrees with its degree-zero ring structure. -/
 instance chartRing_isScalarTower (i : ULift.{u} (Fin (n + 1))) :
