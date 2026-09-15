@@ -45,9 +45,7 @@ private lemma chartFraction_val_mul (i : ULift.{u} (Fin (n + 1))) (d : ℕ)
     (chartFraction k n i d p hp).val *
       algebraMap (CoordinateRing k n) (ChartLocalization k n i) (coordinate k n i ^ d) =
         algebraMap (CoordinateRing k n) (ChartLocalization k n i) p := by
-  change Localization.mk (M := Submonoid.powers (coordinate k n i))
-    p ⟨coordinate k n i ^ d, ⟨d, rfl⟩⟩ * _ = _
-  rw [Localization.mk_eq_mk']
+  rw [chartFraction, HomogeneousLocalization.Away.val_mk, Localization.mk_eq_mk']
   exact IsLocalization.mk'_spec _ _ _
 
 /-- The degree-zero homogeneous fraction Xⱼ/Xᵢ, including the value 1 when j = i. -/
@@ -58,17 +56,16 @@ private lemma coordinateRatio_val_mul (i j : ULift.{u} (Fin (n + 1))) :
     (coordinateRatio k n i j).val *
       algebraMap (CoordinateRing k n) (ChartLocalization k n i) (coordinate k n i) =
         algebraMap (CoordinateRing k n) (ChartLocalization k n i) (coordinate k n j) := by
-  simpa only [pow_one] using
+  simpa only [coordinateRatio, pow_one] using
     chartFraction_val_mul k n i 1 (coordinate k n j) (MvPolynomial.isHomogeneous_X k j)
 
 @[simp]
 lemma coordinateRatio_self (i : ULift.{u} (Fin (n + 1))) :
     coordinateRatio k n i i = 1 := by
   apply HomogeneousLocalization.val_injective (Submonoid.powers (coordinate k n i))
-  rw [HomogeneousLocalization.val_one]
-  change Localization.mk (M := Submonoid.powers (coordinate k n i))
-    (coordinate k n i) ⟨coordinate k n i ^ 1, ⟨1, rfl⟩⟩ = 1
-  rw [Localization.mk_eq_mk', IsLocalization.mk'_eq_iff_eq_mul]
+  rw [coordinateRatio, chartFraction, HomogeneousLocalization.Away.val_mk,
+    HomogeneousLocalization.val_one, Localization.mk_eq_mk',
+    IsLocalization.mk'_eq_iff_eq_mul]
   simp
 
 /-- Substitute the affine coordinate ratios into a polynomial. -/
@@ -153,9 +150,9 @@ private lemma aeval_coordinateRatio (i : ULift.{u} (Fin (n + 1)))
     MvPolynomial.aeval (coordinateRatio k n i) p = chartFraction k n i d p hp := by
   apply HomogeneousLocalization.val_injective (Submonoid.powers (coordinate k n i))
   change chartRingToLocalization k n i (MvPolynomial.aeval (coordinateRatio k n i) p) =
-    Localization.mk (M := Submonoid.powers (coordinate k n i))
-    p ⟨coordinate k n i ^ d, ⟨d, rfl⟩⟩
-  rw [MvPolynomial.comp_aeval_apply, Localization.mk_eq_mk',
+    (chartFraction k n i d p hp).val
+  rw [MvPolynomial.comp_aeval_apply, chartFraction, HomogeneousLocalization.Away.val_mk,
+    Localization.mk_eq_mk',
     IsLocalization.eq_mk'_iff_mul_eq]
   let f := algebraMap (CoordinateRing k n) (ChartLocalization k n i)
   have hscale := homogeneous_eval₂_mul hp (algebraMap k (ChartLocalization k n i))
@@ -311,7 +308,7 @@ lemma affineChartι_structureMap (i : ULift.{u} (Fin (n + 1))) :
     affineChartι k n i ≫ Variety.projectiveStructureMap k n =
       (Variety.affineScheme k n ↘ baseScheme k) := by
   rw [affineChartι, Category.assoc, chartι_structureMap,
-    ← chartAffineSpaceIso_hom_structureMap]
-  simp
+    ← chartAffineSpaceIso_hom_structureMap, ← Category.assoc,
+    Iso.inv_hom_id, Category.id_comp]
 
 end LeanVarieties.ProjectiveSpace
