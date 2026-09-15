@@ -37,33 +37,37 @@ private abbrev ChartLocalization (i : ULift.{u} (Fin (n + 1))) :=
 private def chartFraction (i : ULift.{u} (Fin (n + 1))) (d : ℕ)
     (p : CoordinateRing k n) (hp : p.IsHomogeneous d) : ChartRing k n i :=
   HomogeneousLocalization.Away.mk (grading k n) (coordinate_mem k n i) d p
-    (by simpa only [smul_eq_mul, mul_one] using hp)
+    (by simpa only [grading, MvPolynomial.mem_homogeneousSubmodule,
+      smul_eq_mul, mul_one] using hp)
 
 private lemma chartFraction_val_mul (i : ULift.{u} (Fin (n + 1))) (d : ℕ)
     (p : CoordinateRing k n) (hp : p.IsHomogeneous d) :
     (chartFraction k n i d p hp).val *
       algebraMap (CoordinateRing k n) (ChartLocalization k n i) (coordinate k n i ^ d) =
         algebraMap (CoordinateRing k n) (ChartLocalization k n i) p := by
-  change Localization.mk p ⟨coordinate k n i ^ d, ⟨d, rfl⟩⟩ * _ = _
+  change Localization.mk (M := Submonoid.powers (coordinate k n i))
+    p ⟨coordinate k n i ^ d, ⟨d, rfl⟩⟩ * _ = _
   rw [Localization.mk_eq_mk']
   exact IsLocalization.mk'_spec _ _ _
 
 /-- The degree-zero homogeneous fraction Xⱼ/Xᵢ, including the value 1 when j = i. -/
 def coordinateRatio (i j : ULift.{u} (Fin (n + 1))) : ChartRing k n i :=
-  chartFraction k n i 1 (coordinate k n j) (coordinate_mem k n j)
+  chartFraction k n i 1 (coordinate k n j) (MvPolynomial.isHomogeneous_X k j)
 
 private lemma coordinateRatio_val_mul (i j : ULift.{u} (Fin (n + 1))) :
     (coordinateRatio k n i j).val *
       algebraMap (CoordinateRing k n) (ChartLocalization k n i) (coordinate k n i) =
         algebraMap (CoordinateRing k n) (ChartLocalization k n i) (coordinate k n j) := by
   simpa only [pow_one] using
-    chartFraction_val_mul k n i 1 (coordinate k n j) (coordinate_mem k n j)
+    chartFraction_val_mul k n i 1 (coordinate k n j) (MvPolynomial.isHomogeneous_X k j)
 
 @[simp]
 lemma coordinateRatio_self (i : ULift.{u} (Fin (n + 1))) :
     coordinateRatio k n i i = 1 := by
   apply HomogeneousLocalization.val_injective (Submonoid.powers (coordinate k n i))
-  change Localization.mk (coordinate k n i) ⟨coordinate k n i ^ 1, ⟨1, rfl⟩⟩ = 1
+  rw [HomogeneousLocalization.val_one]
+  change Localization.mk (M := Submonoid.powers (coordinate k n i))
+    (coordinate k n i) ⟨coordinate k n i ^ 1, ⟨1, rfl⟩⟩ = 1
   rw [Localization.mk_eq_mk', IsLocalization.mk'_eq_iff_eq_mul]
   simp
 
@@ -110,7 +114,7 @@ private lemma dehomogenizeLocalization_algebraMap (i : ULift.{u} (Fin (n + 1)))
     dehomogenizeLocalization k n i
       (algebraMap (CoordinateRing k n) (ChartLocalization k n i) p) =
         dehomogenize k n i p := by
-  exact IsLocalization.Away.lift_eq _ _ _
+  simp [dehomogenizeLocalization]
 
 /-- Dehomogenization descends to the degree-zero homogeneous localization. -/
 def chartRingToPolynomial (i : ULift.{u} (Fin (n + 1))) :
@@ -121,6 +125,7 @@ private lemma chartRingToPolynomial_fraction (i : ULift.{u} (Fin (n + 1)))
     (d : ℕ) (p : CoordinateRing k n) (hp : p.IsHomogeneous d) :
     chartRingToPolynomial k n i (chartFraction k n i d p hp) =
       dehomogenize k n i p := by
+  change dehomogenizeLocalization k n i (chartFraction k n i d p hp).val = _
   have h := congrArg (dehomogenizeLocalization k n i)
     (chartFraction_val_mul k n i d p hp)
   simpa only [map_mul, dehomogenizeLocalization_algebraMap, map_pow,
@@ -148,7 +153,8 @@ private lemma aeval_coordinateRatio (i : ULift.{u} (Fin (n + 1)))
     MvPolynomial.aeval (coordinateRatio k n i) p = chartFraction k n i d p hp := by
   apply HomogeneousLocalization.val_injective (Submonoid.powers (coordinate k n i))
   change chartRingToLocalization k n i (MvPolynomial.aeval (coordinateRatio k n i) p) =
-    Localization.mk p ⟨coordinate k n i ^ d, ⟨d, rfl⟩⟩
+    Localization.mk (M := Submonoid.powers (coordinate k n i))
+    p ⟨coordinate k n i ^ d, ⟨d, rfl⟩⟩
   rw [MvPolynomial.comp_aeval_apply, Localization.mk_eq_mk',
     IsLocalization.eq_mk'_iff_mul_eq]
   let f := algebraMap (CoordinateRing k n) (ChartLocalization k n i)
@@ -191,7 +197,8 @@ def chartRingEquivPolynomial (i : ULift.{u} (Fin (n + 1))) :
       obtain ⟨d, p, hp, rfl⟩ := HomogeneousLocalization.Away.mk_surjective
         (grading k n) (coordinate_mem k n i) z
       have hp' : p.IsHomogeneous d := by
-        simpa only [smul_eq_mul, mul_one] using hp
+        simpa only [grading, MvPolynomial.mem_homogeneousSubmodule,
+          smul_eq_mul, mul_one] using hp
       change chartPolynomialToRing k n i
         (chartRingToPolynomial k n i (chartFraction k n i d p hp')) =
           chartFraction k n i d p hp'
@@ -238,11 +245,21 @@ def chartIndexEquiv (i : ULift.{u} (Fin (n + 1))) :
         apply ULift.ext
         exact ha)
 
+@[simp]
+lemma chartIndexEquiv_apply_val (i : ULift.{u} (Fin (n + 1))) (j : ULift.{u} (Fin n)) :
+    (chartIndexEquiv n i j).val = ULift.up (i.down.succAbove j.down) := rfl
+
 /-- Reindex the polynomial chart coordinates by Fin n. -/
 def chartRingEquivAffine (i : ULift.{u} (Fin (n + 1))) :
     ChartRing k n i ≃ₐ[k] MvPolynomial (ULift.{u} (Fin n)) k :=
   (chartRingEquivPolynomial k n i).trans
     (MvPolynomial.renameEquiv k (chartIndexEquiv n i).symm)
+
+@[simp]
+lemma chartRingEquivAffine_symm_X (i : ULift.{u} (Fin (n + 1))) (j : ULift.{u} (Fin n)) :
+    (chartRingEquivAffine k n i).symm (MvPolynomial.X j) =
+      coordinateRatio k n i (ULift.up (i.down.succAbove j.down)) := by
+  simp [chartRingEquivAffine, MvPolynomial.renameEquiv_apply]
 
 /-- The spectrum of each standard chart ring is affine n-space over k. -/
 def chartAffineSpaceIso (i : ULift.{u} (Fin (n + 1))) :
@@ -253,13 +270,13 @@ def chartAffineSpaceIso (i : ULift.{u} (Fin (n + 1))) :
 @[reassoc (attr := simp)]
 lemma chartAffineSpaceIso_hom_structureMap (i : ULift.{u} (Fin (n + 1))) :
     (chartAffineSpaceIso k n i).hom ≫
-        (Variety.affineSpace (k := k) n).structureMap = chartStructureMap k n i := by
+        (Variety.affineScheme k n ↘ baseScheme k) = chartStructureMap k n i := by
   change (Spec.map (CommRingCat.ofHom (chartRingEquivAffine k n i).symm.toRingHom) ≫
     (AlgebraicGeometry.AffineSpace.SpecIso (ULift.{u} (Fin n)) (.of k)).inv) ≫
       (Variety.affineScheme k n ↘ baseScheme k) = _
   rw [Category.assoc, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, ← Spec.map_comp]
   congr 1
-  ext r
+  ext r : 2
   exact (chartRingEquivAffine k n i).symm.commutes r
 
 /-- Each standard open of projective n-space is isomorphic to affine n-space. -/
@@ -270,7 +287,7 @@ def coordinateOpenIsoAffineSpace (i : ULift.{u} (Fin (n + 1))) :
 @[reassoc (attr := simp)]
 lemma coordinateOpenIsoAffineSpace_hom_structureMap (i : ULift.{u} (Fin (n + 1))) :
     (coordinateOpenIsoAffineSpace k n i).hom ≫
-        (Variety.affineSpace (k := k) n).structureMap =
+        (Variety.affineScheme k n ↘ baseScheme k) =
       (coordinateOpen k n i).ι ≫ Variety.projectiveStructureMap k n := by
   change ((coordinateOpenIsoSpec k n i).hom ≫ (chartAffineSpaceIso k n i).hom) ≫ _ = _
   rw [Category.assoc, chartAffineSpaceIso_hom_structureMap,
@@ -292,7 +309,7 @@ instance affineChartι_isOpenImmersion (i : ULift.{u} (Fin (n + 1))) :
 @[reassoc (attr := simp)]
 lemma affineChartι_structureMap (i : ULift.{u} (Fin (n + 1))) :
     affineChartι k n i ≫ Variety.projectiveStructureMap k n =
-      (Variety.affineSpace (k := k) n).structureMap := by
+      (Variety.affineScheme k n ↘ baseScheme k) := by
   rw [affineChartι, Category.assoc, chartι_structureMap,
     ← chartAffineSpaceIso_hom_structureMap]
   simp
