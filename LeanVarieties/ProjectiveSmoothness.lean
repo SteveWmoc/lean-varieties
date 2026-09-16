@@ -24,15 +24,25 @@ variable {k : Type u} [Field k]
 /-- Projective `n`-space is smooth over its base field. -/
 instance projectiveSpace_isSmooth (n : ℕ) :
     (projectiveSpace (k := k) n).IsSmooth := by
-  letI : HasRingHomProperty (@Smooth.{u}) RingHom.Smooth := inferInstance
-  letI : IsZariskiLocalAtSource (@Smooth.{u}) := inferInstance
+  let : MorphismProperty.RespectsIso (@Smooth.{u}) := by
+    rw [HasRingHomProperty.eq_affineLocally (P := @Smooth.{u})]
+    exact affineLocally_respectsIso _ RingHom.Smooth.respectsIso
   change Smooth (projectiveStructureMap k n)
-  rw [IsZariskiLocalAtSource.iff_of_iSup_eq_top
-    (P := @Smooth.{u}) (ProjectiveSpace.coordinateOpen k n)
-    (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)]
+  rw [HasRingHomProperty.iff_of_source_openCover
+    (P := @Smooth.{u}) (ProjectiveSpace.coordinateAffineOpenCover k n).openCover]
   intro i
-  rw [← ProjectiveSpace.coordinateOpenIsoAffineSpace_hom_structureMap]
-  infer_instance
+  have hChart : Smooth (ProjectiveSpace.chartStructureMap k n i) := by
+    rw [← ProjectiveSpace.chartAffineSpaceIso_hom_structureMap,
+      MorphismProperty.cancel_left_of_respectsIso (P := @Smooth.{u})
+        (ProjectiveSpace.chartAffineSpaceIso k n i).hom]
+    exact affineSpace_isSmooth n
+  have hLocal :
+      Smooth ((ProjectiveSpace.coordinateAffineOpenCover k n).openCover.f i ≫
+        projectiveStructureMap k n) := by
+    simpa only [Scheme.AffineOpenCover.openCover_f,
+      ProjectiveSpace.coordinateAffineOpenCover_f,
+      ProjectiveSpace.chartι_structureMap] using hChart
+  exact HasRingHomProperty.appTop (P := @Smooth.{u}) _ hLocal
 
 end Variety
 
