@@ -27,6 +27,8 @@ instance projectiveSpace_isSmooth (n : ℕ) :
   let : MorphismProperty.RespectsIso (@Smooth.{u}) := by
     rw [HasRingHomProperty.eq_affineLocally (P := @Smooth.{u})]
     exact affineLocally_respectsIso _ RingHom.Smooth.respectsIso
+  haveI : ∀ i, IsAffine ((ProjectiveSpace.coordinateAffineOpenCover k n).openCover.X i) :=
+    fun i => inferInstance
   change Smooth (projectiveStructureMap k n)
   rw [HasRingHomProperty.iff_of_source_openCover
     (P := @Smooth.{u}) (ProjectiveSpace.coordinateAffineOpenCover k n).openCover]
