@@ -26,7 +26,7 @@ instance projectiveSpace_isSmooth (n : ℕ) :
     (projectiveSpace (k := k) n).IsSmooth := by
   change Smooth (projectiveStructureMap k n)
   rw [IsZariskiLocalAtSource.iff_of_iSup_eq_top
-    (P := @Smooth) (ProjectiveSpace.coordinateOpen k n)
+    (P := @Smooth.{u}) (ProjectiveSpace.coordinateOpen k n)
     (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)]
   intro i
   rw [← ProjectiveSpace.coordinateOpenIsoAffineSpace_hom_structureMap]
