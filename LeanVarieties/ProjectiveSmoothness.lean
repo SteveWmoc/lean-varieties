@@ -32,12 +32,12 @@ instance projectiveSpace_isSmooth (n : ℕ) :
     (ProjectiveSpace.coordinateOpen k n)
     (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)
   haveI : ∀ i : 𝒰.I₀, IsAffine (𝒰.X i) := fun i => by
-    dsimp [𝒰] at i ⊢
+    dsimp [𝒰, Scheme.openCoverOfIsOpenCover] at i ⊢
     exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   change Smooth (projectiveStructureMap k n)
   rw [HasRingHomProperty.iff_of_source_openCover (P := @Smooth.{u}) 𝒰]
   intro i
-  dsimp [𝒰] at i
+  dsimp [𝒰, Scheme.openCoverOfIsOpenCover] at i
   have hLocal :
       Smooth ((ProjectiveSpace.coordinateOpen k n i).ι ≫ projectiveStructureMap k n) := by
     rw [← ProjectiveSpace.coordinateOpenIsoAffineSpace_hom_structureMap,
@@ -45,7 +45,7 @@ instance projectiveSpace_isSmooth (n : ℕ) :
         (ProjectiveSpace.coordinateOpenIsoAffineSpace k n i).hom]
     exact affineSpace_isSmooth n
   have hLocal' : Smooth (𝒰.f i ≫ projectiveStructureMap k n) := by
-    simpa [𝒰] using hLocal
+    simpa [𝒰, Scheme.openCoverOfIsOpenCover] using hLocal
   exact HasRingHomProperty.appTop (P := @Smooth.{u}) _ hLocal'
 
 end Variety
