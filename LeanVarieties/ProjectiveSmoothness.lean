@@ -46,6 +46,9 @@ instance projectiveSpace_isSmooth (n : ℕ) :
     exact affineSpace_isSmooth n
   have hLocal' : Smooth (𝒰.f i ≫ projectiveStructureMap k n) := by
     simpa [𝒰, Scheme.openCoverOfIsOpenCover] using hLocal
+  haveI : IsAffine (𝒰.X i) := by
+    dsimp [𝒰, Scheme.openCoverOfIsOpenCover]
+    exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   exact HasRingHomProperty.appTop (P := @Smooth.{u}) _ hLocal'
 
 end Variety
