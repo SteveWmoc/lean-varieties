@@ -24,6 +24,8 @@ variable {k : Type u} [Field k]
 /-- Projective `n`-space is smooth over its base field. -/
 instance projectiveSpace_isSmooth (n : ℕ) :
     (projectiveSpace (k := k) n).IsSmooth := by
+  letI : HasRingHomProperty (@Smooth.{u}) RingHom.Smooth := inferInstance
+  letI : IsZariskiLocalAtSource (@Smooth.{u}) := inferInstance
   change Smooth (projectiveStructureMap k n)
   rw [IsZariskiLocalAtSource.iff_of_iSup_eq_top
     (P := @Smooth.{u}) (ProjectiveSpace.coordinateOpen k n)
