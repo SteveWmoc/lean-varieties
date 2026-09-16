@@ -31,12 +31,13 @@ instance projectiveSpace_isSmooth (n : ℕ) :
   let 𝒰 := (projectiveScheme k n).openCoverOfIsOpenCover
     (ProjectiveSpace.coordinateOpen k n)
     (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)
-  haveI : ∀ i : ULift.{u} (Fin (n + 1)), IsAffine (𝒰.X i) := fun i => by
-    change IsAffine (ProjectiveSpace.coordinateOpen k n i)
+  haveI : ∀ i : 𝒰.I₀, IsAffine (𝒰.X i) := fun i => by
+    dsimp [𝒰] at i ⊢
     exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   change Smooth (projectiveStructureMap k n)
   rw [HasRingHomProperty.iff_of_source_openCover (P := @Smooth.{u}) 𝒰]
   intro i
+  dsimp [𝒰] at i
   have hLocal :
       Smooth ((ProjectiveSpace.coordinateOpen k n i).ι ≫ projectiveStructureMap k n) := by
     rw [← ProjectiveSpace.coordinateOpenIsoAffineSpace_hom_structureMap,
