@@ -21,30 +21,31 @@ namespace Variety
 
 variable {k : Type u} [Field k]
 
+set_option linter.style.haveILetI false in
 /-- Projective `n`-space is smooth over its base field. -/
 instance projectiveSpace_isSmooth (n : ℕ) :
     (projectiveSpace (k := k) n).IsSmooth := by
   let : MorphismProperty.RespectsIso (@Smooth.{u}) := by
     rw [HasRingHomProperty.eq_affineLocally (P := @Smooth.{u})]
     exact affineLocally_respectsIso _ RingHom.Smooth.respectsIso
-  haveI : ∀ i, IsAffine ((ProjectiveSpace.coordinateAffineOpenCover k n).openCover.X i) :=
-    fun i => inferInstance
+  let 𝒰 := (projectiveScheme k n).openCoverOfIsOpenCover
+    (ProjectiveSpace.coordinateOpen k n)
+    (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)
+  haveI : ∀ i : ULift.{u} (Fin (n + 1)), IsAffine (𝒰.X i) := fun i => by
+    change IsAffine (ProjectiveSpace.coordinateOpen k n i)
+    exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   change Smooth (projectiveStructureMap k n)
-  rw [HasRingHomProperty.iff_of_source_openCover
-    (P := @Smooth.{u}) (ProjectiveSpace.coordinateAffineOpenCover k n).openCover]
+  rw [HasRingHomProperty.iff_of_source_openCover (P := @Smooth.{u}) 𝒰]
   intro i
-  have hChart : Smooth (ProjectiveSpace.chartStructureMap k n i) := by
-    rw [← ProjectiveSpace.chartAffineSpaceIso_hom_structureMap,
-      MorphismProperty.cancel_left_of_respectsIso (P := @Smooth.{u})
-        (ProjectiveSpace.chartAffineSpaceIso k n i).hom]
-    exact affineSpace_isSmooth n
   have hLocal :
-      Smooth ((ProjectiveSpace.coordinateAffineOpenCover k n).openCover.f i ≫
-        projectiveStructureMap k n) := by
-    simpa only [Scheme.AffineOpenCover.openCover_f,
-      ProjectiveSpace.coordinateAffineOpenCover_f,
-      ProjectiveSpace.chartι_structureMap] using hChart
-  exact HasRingHomProperty.appTop (P := @Smooth.{u}) _ hLocal
+      Smooth ((ProjectiveSpace.coordinateOpen k n i).ι ≫ projectiveStructureMap k n) := by
+    rw [← ProjectiveSpace.coordinateOpenIsoAffineSpace_hom_structureMap,
+      MorphismProperty.cancel_left_of_respectsIso (P := @Smooth.{u})
+        (ProjectiveSpace.coordinateOpenIsoAffineSpace k n i).hom]
+    exact affineSpace_isSmooth n
+  have hLocal' : Smooth (𝒰.f i ≫ projectiveStructureMap k n) := by
+    simpa [𝒰] using hLocal
+  exact HasRingHomProperty.appTop (P := @Smooth.{u}) _ hLocal'
 
 end Variety
 
