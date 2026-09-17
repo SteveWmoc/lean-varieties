@@ -22,7 +22,7 @@ variable {k : Type u} [Field k]
 
 /-- Projective `n`-space as an object of the category of projective varieties. -/
 def projectiveSpace (n : ℕ) : ProjectiveVariety k :=
-  ⟨Variety.projectiveSpace (k := k) n, inferInstance⟩
+  ⟨Variety.projectiveSpace (k := k) n, Variety.projectiveSpace_isProjective n⟩
 
 @[simp]
 lemma projectiveSpace_obj (n : ℕ) :
@@ -36,7 +36,8 @@ variable {k : Type u} [Field k]
 
 /-- Projective `n`-space as an object of the category of smooth projective varieties. -/
 def projectiveSpace (n : ℕ) : SmoothProjectiveVariety k :=
-  ⟨Variety.projectiveSpace (k := k) n, ⟨inferInstance, inferInstance⟩⟩
+  ⟨Variety.projectiveSpace (k := k) n,
+    ⟨Variety.projectiveSpace_isSmooth n, Variety.projectiveSpace_isProjective n⟩⟩
 
 @[simp]
 lemma projectiveSpace_obj (n : ℕ) :
