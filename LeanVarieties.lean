@@ -7,3 +7,4 @@ import LeanVarieties.Projective
 import LeanVarieties.ProjectiveCharts
 import LeanVarieties.ProjectiveChartCoordinates
 import LeanVarieties.ProjectiveSmoothness
+import LeanVarieties.ProjectiveSpaceObjects
