@@ -29,6 +29,7 @@ morphism is smooth of relative dimension `n`. -/
 abbrev IsSmoothOfDimension (X : Variety k) (n : ℕ) : Prop :=
   SmoothOfRelativeDimension n X.structureMap
 
+set_option linter.style.haveILetI false in
 /-- Being smooth of dimension `n` implies smoothness. -/
 lemma IsSmoothOfDimension.isSmooth {X : Variety k} {n : ℕ}
     (h : X.IsSmoothOfDimension n) : X.IsSmooth := by
@@ -69,7 +70,7 @@ instance isSmooth (X : SmoothVarietyOfDimension k n) : X.obj.IsSmooth :=
 /-- Forget the fixed relative dimension while retaining smoothness. -/
 def forgetDimension (k : Type u) [Field k] (n : ℕ) :
     SmoothVarietyOfDimension k n ⥤ SmoothVariety k :=
-  ObjectProperty.ιOfLE (fun X h => h.isSmooth)
+  ObjectProperty.ιOfLE (fun _ h => h.isSmooth)
 
 end SmoothVarietyOfDimension
 
@@ -91,7 +92,7 @@ instance isProjective (X : SmoothProjectiveVarietyOfDimension k n) :
 /-- Forget the fixed relative dimension while retaining smoothness and projectivity. -/
 def forgetDimension (k : Type u) [Field k] (n : ℕ) :
     SmoothProjectiveVarietyOfDimension k n ⥤ SmoothProjectiveVariety k :=
-  ObjectProperty.ιOfLE (fun X h => ⟨h.1.isSmooth, h.2⟩)
+  ObjectProperty.ιOfLE (fun _ h => ⟨h.1.isSmooth, h.2⟩)
 
 end SmoothProjectiveVarietyOfDimension
 
