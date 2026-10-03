@@ -22,3 +22,17 @@ jobs:
         with:
           use-mathlib-cache: true
           build-args: "--wfail"
+
+      - name: Collect builtin code quality findings
+        run: |
+          mkdir -p reports
+          lake --quiet lint --code-quality LeanVarieties > reports/code-quality.stream.json
+          jq --slurp . reports/code-quality.stream.json > reports/code-quality.json
+
+      - name: Upload code quality report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: lean-code-quality
+          path: reports/
+          if-no-files-found: ignore
