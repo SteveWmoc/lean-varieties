@@ -93,7 +93,8 @@ of projective `m`-space. The ambient dimension `m` can differ from `n`. -/
 def ofProjectiveSpace {X : Variety k} [X.IsSmoothOfDimension n] (m : ℕ)
     (f : X ⟶ Variety.projectiveSpace (k := k) m) [IsClosedImmersion f.hom.left] :
     SmoothProjectiveVarietyOfDimension k n :=
-  ofClosedImmersion ⟨Variety.projectiveSpace (k := k) m, inferInstance⟩ f
+  ofClosedImmersion
+    ⟨Variety.projectiveSpace (k := k) m, Variety.projectiveSpace_isProjective m⟩ f
 
 @[simp]
 lemma ofProjectiveSpace_obj {X : Variety k} [X.IsSmoothOfDimension n] (m : ℕ)
