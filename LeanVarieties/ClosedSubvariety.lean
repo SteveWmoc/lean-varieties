@@ -1,4 +1,5 @@
 import LeanVarieties.Projective
+import LeanVarieties.Dimension
 
 /-!
 # Closed subvarieties of projective varieties
@@ -69,6 +70,37 @@ lemma ofClosedImmersion_obj {X : Variety k} [X.IsSmooth] (Y : ProjectiveVariety 
     (ofClosedImmersion Y f).obj = X := rfl
 
 end SmoothProjectiveVariety
+
+namespace SmoothProjectiveVarietyOfDimension
+
+variable {k : Type u} [Field k] {n : ℕ}
+
+/-- Package a smooth variety of dimension `n` admitting a closed immersion
+into a projective variety as a smooth projective variety of dimension `n`.
+The dimension witness is required for the source, independently of the target. -/
+def ofClosedImmersion {X : Variety k} [X.IsSmoothOfDimension n]
+    (Y : ProjectiveVariety k) (f : X ⟶ Y.obj) [IsClosedImmersion f.hom.left] :
+    SmoothProjectiveVarietyOfDimension k n :=
+  ⟨X, ⟨inferInstance, Variety.IsProjective.of_closedImmersion_hom f⟩⟩
+
+@[simp]
+lemma ofClosedImmersion_obj {X : Variety k} [X.IsSmoothOfDimension n]
+    (Y : ProjectiveVariety k) (f : X ⟶ Y.obj) [IsClosedImmersion f.hom.left] :
+    (ofClosedImmersion (n := n) Y f).obj = X := rfl
+
+/-- Package a smooth `n`-dimensional variety embedded as a closed subvariety
+of projective `m`-space. The ambient dimension `m` can differ from `n`. -/
+def ofProjectiveSpace {X : Variety k} [X.IsSmoothOfDimension n] (m : ℕ)
+    (f : X ⟶ Variety.projectiveSpace (k := k) m) [IsClosedImmersion f.hom.left] :
+    SmoothProjectiveVarietyOfDimension k n :=
+  ofClosedImmersion ⟨Variety.projectiveSpace (k := k) m, inferInstance⟩ f
+
+@[simp]
+lemma ofProjectiveSpace_obj {X : Variety k} [X.IsSmoothOfDimension n] (m : ℕ)
+    (f : X ⟶ Variety.projectiveSpace (k := k) m) [IsClosedImmersion f.hom.left] :
+    (ofProjectiveSpace (n := n) m f).obj = X := rfl
+
+end SmoothProjectiveVarietyOfDimension
 
 end
 
