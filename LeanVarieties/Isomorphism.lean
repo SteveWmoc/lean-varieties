@@ -57,30 +57,30 @@ lemma isSmoothOfDimension_of_iso (e : X ≅ Y) (n : ℕ)
 lemma isSmooth_iff_of_iso (e : X ≅ Y) : X.IsSmooth ↔ Y.IsSmooth := by
   constructor
   · intro h
-    haveI : X.IsSmooth := h
+    have : X.IsSmooth := h
     exact isSmooth_of_iso e.symm
   · intro h
-    haveI : Y.IsSmooth := h
+    have : Y.IsSmooth := h
     exact isSmooth_of_iso e
 
 /-- Isomorphic varieties have the same properness property. -/
 lemma isProper_iff_of_iso (e : X ≅ Y) : X.IsProper ↔ Y.IsProper := by
   constructor
   · intro h
-    haveI : X.IsProper := h
+    have : X.IsProper := h
     exact isProper_of_iso e.symm
   · intro h
-    haveI : Y.IsProper := h
+    have : Y.IsProper := h
     exact isProper_of_iso e
 
 /-- Isomorphic varieties have the same projectivity property. -/
 lemma isProjective_iff_of_iso (e : X ≅ Y) : X.IsProjective ↔ Y.IsProjective := by
   constructor
   · intro h
-    haveI : X.IsProjective := h
+    have : X.IsProjective := h
     exact isProjective_of_iso e.symm
   · intro h
-    haveI : Y.IsProjective := h
+    have : Y.IsProjective := h
     exact isProjective_of_iso e
 
 /-- Isomorphic varieties have the same fixed smooth relative dimension. -/
@@ -88,10 +88,10 @@ lemma isSmoothOfDimension_iff_of_iso (e : X ≅ Y) (n : ℕ) :
     X.IsSmoothOfDimension n ↔ Y.IsSmoothOfDimension n := by
   constructor
   · intro h
-    haveI : X.IsSmoothOfDimension n := h
+    have : X.IsSmoothOfDimension n := h
     exact isSmoothOfDimension_of_iso e.symm n
   · intro h
-    haveI : Y.IsSmoothOfDimension n := h
+    have : Y.IsSmoothOfDimension n := h
     exact isSmoothOfDimension_of_iso e n
 
 end Variety
