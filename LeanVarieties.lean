@@ -12,3 +12,4 @@ import LeanVarieties.ClosedSubvariety
 import LeanVarieties.Dimension
 import LeanVarieties.StandardSpaceDimension
 import LeanVarieties.Isomorphism
+import LeanVarieties.ClosedSubscheme
