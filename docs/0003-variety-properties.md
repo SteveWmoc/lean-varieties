@@ -18,11 +18,10 @@ The base point `Spec k` over itself is included as a sanity-check example. Its
 structure morphism is the identity, so mathlib proves it smooth and proper
 without any additional geometric theorem.
 
-This PR deliberately does not introduce a projective-variety predicate. Current
-mathlib has `Proj` and proves properness results for projective spectra, but a
-turnkey general projective-morphism API has not been identified in the pinned
-4.33.0 surface. Projectivity will therefore be designed separately rather than
-silently conflated with properness.
+Projectivity was designed separately from this smooth/proper layer. The
+current [projective-variety API](0006-projective-varieties.md) defines it by a
+closed immersion over the base into projective space and proves properness
+as a consequence.
 
 PR #4 deferred the proof that affine space is smooth because the pinned
 mathlib affine-space module does not export a ready-made `Smooth` instance.

@@ -33,5 +33,7 @@ The main purpose is API ergonomics. Later constructions aimed at the Hodge
 conjecture can now take a canonical smooth projective object directly, without
 repackaging smoothness and projectivity at each use site.
 
-This slice does not add morphisms between projective spaces, dimension theory,
-closed subvariety constructors, cycles, cohomology, or Hodge structures.
+Fixed smooth dimension and closed subvariety constructors are now available
+in [0013](0013-standard-space-dimension.md) and
+[0011](0011-closed-subvarieties.md). A dedicated API for morphisms between
+projective spaces, cycles, cohomology, and Hodge structures remains future work.

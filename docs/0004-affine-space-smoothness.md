@@ -15,7 +15,7 @@ assume characteristic zero or algebraic closedness.
 
 ## Proof bridge
 
-The proof uses the pinned mathlib v4.33.0 definitions throughout:
+The proof uses the pinned mathlib v4.34.1 definitions throughout:
 
 1. `AffineSpace.SpecIso` identifies the underlying affine scheme with
    `Spec (MvPolynomial (ULift (Fin n)) k)`.
@@ -40,6 +40,8 @@ Importing `LeanVarieties.AffineSpace` (or the library root) exposes the
 smoothness instance. The affine-space module imports `LeanVarieties.Properties`
 to use the existing `Variety.IsSmooth` abbreviation.
 
-The instance connects the standard affine-space example to the smooth-variety
-property layer. Dimension, projective space, projectivity, and Hodge-theoretic
-objects remain separate work.
+The instance connects affine space to the smooth-variety property layer.
+The [fixed-dimension witnesses](0013-standard-space-dimension.md) now also
+package it as a smooth variety of dimension `n`. Projective space and
+projectivity are developed in separate modules; Hodge-theoretic objects
+remain future work.

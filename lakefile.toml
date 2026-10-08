@@ -1,6 +1,7 @@
 name = "LeanVarieties"
 version = "0.1.0"
 defaultTargets = ["LeanVarieties"]
+builtinLint = true
 
 [[require]]
 name = "mathlib"

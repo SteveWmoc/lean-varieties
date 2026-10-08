@@ -18,5 +18,7 @@ of finite type. Affineness supplies quasi-compactness and separatedness, so the
 scheme satisfies the project's definition of `Variety k` without any new
 algebraic-geometry proofs.
 
-This PR deliberately does not add dimension theory, smoothness, products, or
-projective space. Those should build on the core example in later PRs.
+The original construction did not add smoothness or dimension witnesses.
+These are now supplied by [0004](0004-affine-space-smoothness.md) and
+[0013](0013-standard-space-dimension.md). Projective space is constructed in
+[0005](0005-projective-space.md); a products API remains future work.

@@ -1,7 +1,7 @@
 # Projective space over a field
 
 PR #6 constructs projective `n`-space as a proper variety over an arbitrary
-field, using the pinned mathlib v4.33.0 projective-spectrum API.
+field, using the pinned mathlib projective-spectrum API (currently v4.34.1).
 
 ## Construction
 
@@ -60,13 +60,12 @@ The exported API includes:
 
 All definitions and proofs include `n = 0` and arbitrary field universes.
 
-## Next boundary
+## Subsequent work
 
-This slice establishes projective space and properness. It does not yet
-define projectivity for a general variety. That property will require a
-closed immersion over the base into some projective space; properness alone
-does not express that condition.
-
-The standard affine charts, smoothness of projective space, its dimension,
-and the isomorphism between projective zero-space and the base point are
-subsequent results. No dimension theorem is implicit in the parameter name.
+General [projectivity](0006-projective-varieties.md) is now defined using a
+closed immersion over the base; properness alone does not express that
+condition. The [standard charts](0007-projective-charts.md),
+[smoothness](0009-projective-space-smoothness.md), and
+[dimension witness](0013-standard-space-dimension.md) are also implemented.
+An explicit variety isomorphism between projective zero-space and the base
+point remains future work.
