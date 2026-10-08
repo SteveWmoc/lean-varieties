@@ -4,7 +4,7 @@
 `Variety.projectiveSpace_isSmoothOfDimension` witness relative dimension `n`
 for affine and projective `n`-space over any field.
 
-The affine proof uses mathlib v4.34’s instance for `ULift (Fin n)`.
+The affine proof uses the pinned mathlib v4.34.1 instance for `ULift (Fin n)`.
 The projective proof checks relative dimension on the standard coordinate
 open cover, transporting the affine witness across the existing chart
 isomorphisms over the base.

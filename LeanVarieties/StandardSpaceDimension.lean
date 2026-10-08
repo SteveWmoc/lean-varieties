@@ -27,7 +27,6 @@ instance affineSpace_isSmoothOfDimension (n : ℕ) :
   change SmoothOfRelativeDimension n ((affineScheme k n) ↘ baseScheme k)
   infer_instance
 
-set_option linter.style.haveILetI false in
 /-- Projective `n`-space is smooth of dimension `n`. -/
 instance projectiveSpace_isSmoothOfDimension (n : ℕ) :
     (projectiveSpace (k := k) n).IsSmoothOfDimension n := by
@@ -38,7 +37,7 @@ instance projectiveSpace_isSmoothOfDimension (n : ℕ) :
   let 𝒰 := (projectiveScheme k n).openCoverOfIsOpenCover
     (ProjectiveSpace.coordinateOpen k n)
     (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)
-  haveI : ∀ i : 𝒰.I₀, IsAffine (𝒰.X i) := fun i => by
+  have : ∀ i : 𝒰.I₀, IsAffine (𝒰.X i) := fun i => by
     dsimp [𝒰, Scheme.openCoverOfIsOpenCover] at i ⊢
     exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   change SmoothOfRelativeDimension n (projectiveStructureMap k n)
@@ -54,7 +53,7 @@ instance projectiveSpace_isSmoothOfDimension (n : ℕ) :
     exact affineSpace_isSmoothOfDimension n
   have hLocal' : SmoothOfRelativeDimension n (𝒰.f i ≫ projectiveStructureMap k n) := by
     simpa [𝒰, Scheme.openCoverOfIsOpenCover] using hLocal
-  haveI : IsAffine (𝒰.X i) := by
+  have : IsAffine (𝒰.X i) := by
     dsimp [𝒰, Scheme.openCoverOfIsOpenCover]
     exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   exact HasRingHomProperty.appTop (P := @SmoothOfRelativeDimension.{u} n) _ hLocal'

@@ -29,11 +29,10 @@ morphism is smooth of relative dimension `n`. -/
 abbrev IsSmoothOfDimension (X : Variety k) (n : ℕ) : Prop :=
   SmoothOfRelativeDimension n X.structureMap
 
-set_option linter.style.haveILetI false in
 /-- Being smooth of dimension `n` implies smoothness. -/
 lemma IsSmoothOfDimension.isSmooth {X : Variety k} {n : ℕ}
     (h : X.IsSmoothOfDimension n) : X.IsSmooth := by
-  letI : SmoothOfRelativeDimension n X.structureMap := h
+  have : SmoothOfRelativeDimension n X.structureMap := h
   exact SmoothOfRelativeDimension.smooth n X.structureMap
 
 /-- Smoothness of fixed dimension as an object property on varieties. -/

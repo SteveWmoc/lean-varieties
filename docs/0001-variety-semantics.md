@@ -14,15 +14,9 @@ For this project, `Variety k` means a separated scheme of finite type over `Spec
 
 Reducedness, irreducibility, integrality, smoothness, properness, and projectivity remain explicit orthogonal properties rather than fields silently built into the word `Variety`.
 
-Thus the intended hierarchy is conceptually:
-
-```text
-Scheme
-  -> scheme over Spec k
-  -> Variety k          (finite type + separated)
-  -> ComplexVariety     (specialize k = C)
-  -> smooth/projective/etc. refinements
-```
+The hierarchy starts with a scheme over `Spec k`, restricts to finite type
+and separatedness to obtain `Variety k`, and then adds geometric properties
+through full subcategories. `ComplexVariety` specializes the field to `ℂ`.
 
 This is a project convention, not a claim that this is the unique standard mathematical definition of *variety*.
 
@@ -55,13 +49,14 @@ The first implementation phase provides only enough API to make the abstraction 
 4. constructors from over-category objects and structural morphisms;
 5. inherited instances for the defining properties.
 
-Standard examples, beginning with affine space, are deferred to the next phase so that the core representation can be validated independently.
-
-Projective space and a projectivity API should be added only after inspecting what current mathlib already exposes around `Proj` and proper morphisms.
+The core representation was validated before adding standard examples.
+[Affine space](0002-affine-space.md), [projective space](0005-projective-space.md),
+and the [projectivity API](0006-projective-varieties.md) are now implemented
+using mathlib's affine-space, `Proj`, and morphism-property infrastructure.
 
 ## Non-goals of the first implementation phase
 
-The following are deliberately postponed:
+The first phase postponed the following:
 
 - dimension and codimension theory;
 - algebraic cycles and Chow groups;
@@ -72,6 +67,11 @@ The following are deliberately postponed:
 - any statement or proof of the Hodge conjecture.
 
 These should be introduced only when a downstream requirement makes the needed interface clear.
+
+Fixed smooth relative dimension is now available; see
+[0012](0012-smooth-dimension.md) and [0013](0013-standard-space-dimension.md).
+General dimension and codimension theory and the Hodge-theoretic items above
+remain outside the implemented API.
 
 ## Exit criterion
 

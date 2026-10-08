@@ -1,7 +1,7 @@
 # Standard affine charts of projective space
 
 PR #8 constructs the finite standard affine open cover of projective space
-over an arbitrary field, using pinned mathlib v4.33.0.
+over an arbitrary field, using pinned mathlib (currently v4.34.1).
 
 ## Coordinate opens and the covering argument
 
@@ -68,11 +68,9 @@ chart rings and chart immersions. A `Fintype` instance and
 
 The construction includes `n = 0`; its cover has one chart.
 
-## Next boundary
+## Subsequent work
 
-This slice constructs affine charts as spectra of homogeneous localizations.
-The identification of each chart ring with a polynomial ring in `n`
-variables remains to be proved over `k`. That identification will connect
-these charts to our affine-space smoothness result and allow smoothness of
-projective space to be proved locally. This slice does not yet claim either
-that chart isomorphism or smoothness of projective space.
+Each chart ring is now identified with a polynomial ring in `n` variables
+over `k`; see [0008](0008-projective-chart-coordinates.md). Those
+isomorphisms connect the charts to affine-space smoothness and supply the
+local proof of [projective-space smoothness](0009-projective-space-smoothness.md).

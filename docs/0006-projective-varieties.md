@@ -35,7 +35,7 @@ proof composes the given closed immersion with a projective-space embedding
 of the target and checks the equation to the base.
 
 `Variety.IsProjective.isProper` exposes properness as a typeclass instance.
-A closed immersion is finite and hence proper in pinned mathlib v4.33.0;
+A closed immersion is finite and hence proper in pinned mathlib v4.34.1;
 its composite with the proper structural morphism of projective space is
 proper. The equation to the base identifies that composite with
 `X.structureMap`.
@@ -66,8 +66,10 @@ underlying variety; properness follows from the projectivity instance.
 algebraic input to a later Hodge statement. This slice supplies neither
 cohomology nor algebraic cycles nor a statement of the conjecture.
 
-## Next boundary
+## Subsequent work
 
-The standard affine charts and smoothness of projective space remain to be
-proved. Defining the smooth projective category does not assert that the
-projective-space examples already carry a smoothness proof.
+The standard affine charts and smoothness of projective space are now proved;
+see [0007](0007-projective-charts.md) and
+[0009](0009-projective-space-smoothness.md). Canonical smooth projective
+objects are packaged in [0010](0010-projective-space-objects.md), with fixed
+dimension witnesses in [0013](0013-standard-space-dimension.md).

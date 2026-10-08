@@ -18,13 +18,14 @@ ProjectiveSpace.coordinateOpenIsoAffineSpace_hom_structureMap
 The coordinate opens cover all of projective space by
 `ProjectiveSpace.iSup_coordinateOpen_eq_top`.
 
-Smoothness in mathlib is Zariski-local on the source. Applying
-`IsZariskiLocalAtSource.iff_of_iSup_eq_top` reduces smoothness of the
+Smoothness in mathlib is Zariski-local on the source. The implementation uses
+`HasRingHomProperty.iff_of_source_openCover` to reduce smoothness of the
 projective structural morphism to smoothness after restriction to every
 coordinate open. The compatibility theorem rewrites each restricted morphism
 as the affine-space structural morphism preceded by a scheme isomorphism.
-Both factors are smooth, so the local goals are discharged by the existing
-smoothness instances.
+Isomorphism invariance reduces each local goal to the existing affine-space
+smoothness witness, which is converted to the ring-level condition by
+`HasRingHomProperty.appTop`.
 
 ## API
 
@@ -39,9 +40,10 @@ It applies to every field and every natural number `n`, including `n = 0`.
 No characteristic assumption or algebraic-closedness assumption is used.
 
 Together with the existing projectivity instance, projective space now gives a
-canonical object of `SmoothProjectiveVariety k` at the property level. This
-slice does not yet add a dedicated constructor for that full-subcategory
-object, dimension theory, transition-function formulas, cycles, cohomology,
-or any Hodge-theoretic definitions.
+canonical object of `SmoothProjectiveVariety k` at the property level.
+Dedicated constructors are now supplied by
+[0010](0010-projective-space-objects.md), and fixed dimension by
+[0013](0013-standard-space-dimension.md). Transition-function formulas,
+cycles, cohomology, and Hodge-theoretic definitions remain future work.
 
-The Lean and mathlib versions remain pinned to v4.33.0.
+The Lean and mathlib versions are pinned to v4.34.1.

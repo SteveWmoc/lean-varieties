@@ -42,10 +42,10 @@ and can be used in the over-category API.
 
 ## Scope
 
-This slice supplies the coordinate identifications. The next step is to
-deduce smoothness of projective space from its standard affine cover.
+These coordinate identifications supply the local proof of
+[projective-space smoothness](0009-projective-space-smoothness.md).
 Transition maps and gluing formulas are also available as future work.
 
-The Lean and mathlib versions remain pinned to v4.33.0. The root module
+The Lean and mathlib versions are pinned to v4.34.1. The root module
 imports the new file so CI checks all definitions and proofs with warnings
 treated as errors.

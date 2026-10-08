@@ -21,7 +21,6 @@ namespace Variety
 
 variable {k : Type u} [Field k]
 
-set_option linter.style.haveILetI false in
 /-- Projective `n`-space is smooth over its base field. -/
 instance projectiveSpace_isSmooth (n : ℕ) :
     (projectiveSpace (k := k) n).IsSmooth := by
@@ -31,7 +30,7 @@ instance projectiveSpace_isSmooth (n : ℕ) :
   let 𝒰 := (projectiveScheme k n).openCoverOfIsOpenCover
     (ProjectiveSpace.coordinateOpen k n)
     (ProjectiveSpace.iSup_coordinateOpen_eq_top k n)
-  haveI : ∀ i : 𝒰.I₀, IsAffine (𝒰.X i) := fun i => by
+  have : ∀ i : 𝒰.I₀, IsAffine (𝒰.X i) := fun i => by
     dsimp [𝒰, Scheme.openCoverOfIsOpenCover] at i ⊢
     exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   change Smooth (projectiveStructureMap k n)
@@ -46,7 +45,7 @@ instance projectiveSpace_isSmooth (n : ℕ) :
     exact affineSpace_isSmooth n
   have hLocal' : Smooth (𝒰.f i ≫ projectiveStructureMap k n) := by
     simpa [𝒰, Scheme.openCoverOfIsOpenCover] using hLocal
-  haveI : IsAffine (𝒰.X i) := by
+  have : IsAffine (𝒰.X i) := by
     dsimp [𝒰, Scheme.openCoverOfIsOpenCover]
     exact ProjectiveSpace.isAffineOpen_coordinateOpen k n i
   exact HasRingHomProperty.appTop (P := @Smooth.{u}) _ hLocal'

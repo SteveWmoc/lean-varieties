@@ -50,9 +50,6 @@ SmoothComplexVarietyOfDimension n
 SmoothProjectiveComplexVarietyOfDimension n
 ```
 
-This slice deliberately does not prove that affine or projective `n`-space
-has relative dimension `n`. Mathlib v4.33 already contains the underlying
-`SmoothOfRelativeDimension` theory, but the later convenience theorem for
-affine space is not present in the pinned release. Establishing the standard
-examples can therefore be handled separately without mixing ring-level
-backport work into this categorical API.
+The standard-space witnesses are now implemented separately in
+[0013](0013-standard-space-dimension.md), using the affine-space instance
+available in the pinned mathlib v4.34.1 and the existing projective charts.
