@@ -29,9 +29,12 @@ build. Ordinary `lake lint` then reads recorded text-linter findings, runs
 registered environment linters with their enabled options, and checks
 deferred documentation references. It fails when it reports violations.
 The root import lists every public module so linting covers the library.
+The current imports register no builtin environment linters; this pass
+therefore reports that none were run. Text/style linting remains active.
 
 `scripts/check-lint.sh` verifies the setup with an isolated temporary package
-using the same toolchain. A deliberate unused local variable must appear as a
+using the same toolchain. A deliberate unused local variable in an ordinary
+term (outside a tactic block) must appear as a
 `linter.unusedVariables` JSON finding and cause ordinary linting to fail.
 The temporary package is deleted on exit and is never part of the library.
 The script then collects the project's report and requires it to be empty.
