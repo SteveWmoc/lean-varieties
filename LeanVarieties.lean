@@ -14,3 +14,4 @@ import LeanVarieties.StandardSpaceDimension
 import LeanVarieties.Isomorphism
 import LeanVarieties.ClosedSubscheme
 import LeanVarieties.ClosedSubschemeInclusions
+import LeanVarieties.ClosedSubschemeZero

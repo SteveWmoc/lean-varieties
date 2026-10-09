@@ -17,4 +17,4 @@ linked where it resolves an earlier boundary. The semantic convention in ADR
 | Fixed smooth dimension | [0012: Categories](0012-smooth-dimension.md), [0013: Standard-space witnesses](0013-standard-space-dimension.md) |
 | Closed immersions | [0011: Projectivity and packaging](0011-closed-subvarieties.md), [0014: Fixed-dimension packaging](0014-fixed-dimension-closed-subvarieties.md) |
 | Isomorphisms | [0015: Invariance of geometric properties](0015-isomorphism-invariance.md) |
-| Closed subschemes | [0016: Construction](0016-closed-subscheme-construction.md), [0017: Inclusions and functoriality](0017-closed-subscheme-inclusions.md) |
+| Closed subschemes | [0016: Construction](0016-closed-subscheme-construction.md), [0017: Inclusions and functoriality](0017-closed-subscheme-inclusions.md), [0018: The zero ideal](0018-zero-ideal-subscheme.md) |
