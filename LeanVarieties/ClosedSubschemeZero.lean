@@ -48,8 +48,9 @@ lemma closedSubschemeBotIso_inv_hom_left (Y : Variety k) :
       inv (Scheme.IdealSheafData.subschemeι (⊥ : Y.toScheme.IdealSheafData)) := by
   have : IsIso (Scheme.IdealSheafData.subschemeι (⊥ : Y.toScheme.IdealSheafData)) :=
     (Scheme.isIso_subschemeι_iff_eq_bot (⊥ : Y.toScheme.IdealSheafData)).2 rfl
-  apply IsIso.eq_inv_of_hom_inv_id
-  exact (forget k).congr_map (closedSubschemeBotIso Y).hom_inv_id
+  exact IsIso.eq_inv_of_hom_inv_id
+    (f := Scheme.IdealSheafData.subschemeι (⊥ : Y.toScheme.IdealSheafData))
+    ((forget k).congr_map (closedSubschemeBotIso Y).hom_inv_id)
 
 @[reassoc (attr := simp)]
 lemma closedSubschemeBotIso_inv_structureMap (Y : Variety k) :
