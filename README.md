@@ -26,6 +26,7 @@ The library currently provides:
   along isomorphisms of varieties.
 - Closed subschemes constructed from ideal-sheaf data, their canonical closed
   immersions, and contravariant functoriality with respect to ideal inclusion.
+  The zero ideal recovers the ambient variety by a canonical isomorphism.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -88,6 +89,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [Isomorphism](LeanVarieties/Isomorphism.lean) | Geometric properties transported along isomorphisms |
 | [ClosedSubscheme](LeanVarieties/ClosedSubscheme.lean) | Closed subschemes as varieties over the ambient base |
 | [ClosedSubschemeInclusions](LeanVarieties/ClosedSubschemeInclusions.lean) | Canonical inclusions and the ideal-sheaf functor |
+| [ClosedSubschemeZero](LeanVarieties/ClosedSubschemeZero.lean) | The zero-ideal subscheme and its ambient isomorphism |
 
 ## Documentation and checks
 
