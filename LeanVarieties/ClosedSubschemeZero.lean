@@ -46,6 +46,8 @@ lemma closedSubschemeBotIso_hom (Y : Variety k) :
 lemma closedSubschemeBotIso_inv_hom_left (Y : Variety k) :
     (closedSubschemeBotIso Y).inv.hom.left =
       inv (Scheme.IdealSheafData.subschemeι (⊥ : Y.toScheme.IdealSheafData)) := by
+  have : IsIso (Scheme.IdealSheafData.subschemeι (⊥ : Y.toScheme.IdealSheafData)) :=
+    (Scheme.isIso_subschemeι_iff_eq_bot (⊥ : Y.toScheme.IdealSheafData)).2 rfl
   apply IsIso.eq_inv_of_hom_inv_id
   exact (forget k).congr_map (closedSubschemeBotIso Y).hom_inv_id
 
