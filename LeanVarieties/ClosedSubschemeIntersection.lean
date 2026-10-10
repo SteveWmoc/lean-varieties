@@ -25,9 +25,12 @@ def closedSubschemeLift (Y : Variety k) (I : Y.toScheme.IdealSheafData)
     {T : Variety k} (f : T ⟶ Y) (h : I ≤ f.hom.left.ker) :
     T ⟶ closedSubscheme Y I :=
   ObjectProperty.homMk (Over.homMk
-    (IsClosedImmersion.lift I.subschemeι f.hom.left (by simpa using h)) (by
-      change IsClosedImmersion.lift I.subschemeι f.hom.left _ ≫
-        (I.subschemeι ≫ Y.structureMap) = T.structureMap
+    (IsClosedImmersion.lift (closedSubschemeι Y I).hom.left f.hom.left (by
+      change I.subschemeι.ker ≤ f.hom.left.ker
+      rw [I.ker_subschemeι]
+      exact h)) (by
+      change IsClosedImmersion.lift (closedSubschemeι Y I).hom.left f.hom.left _ ≫
+        ((closedSubschemeι Y I).hom.left ≫ Y.structureMap) = T.structureMap
       rw [← Category.assoc, IsClosedImmersion.lift_fac]
       exact Over.w f.hom))
 
@@ -36,7 +39,7 @@ lemma closedSubschemeLift_ι (Y : Variety k) (I : Y.toScheme.IdealSheafData)
     {T : Variety k} (f : T ⟶ Y) (h : I ≤ f.hom.left.ker) :
     closedSubschemeLift Y I f h ≫ closedSubschemeι Y I = f := by
   apply (forget k).map_injective
-  exact IsClosedImmersion.lift_fac I.subschemeι f.hom.left _
+  exact IsClosedImmersion.lift_fac (closedSubschemeι Y I).hom.left f.hom.left _
 
 /-- Maps into a closed subscheme are determined by their ambient composite. -/
 lemma closedSubscheme_hom_ext (Y : Variety k) (I : Y.toScheme.IdealSheafData)
@@ -101,13 +104,11 @@ def closedSubschemeIntersectionLift (Y : Variety k) (I J : Y.toScheme.IdealSheaf
   closedSubschemeLift Y (I ⊔ J) (f ≫ closedSubschemeι Y I) (by
     change I ⊔ J ≤ (f.hom.left ≫ I.subschemeι).ker
     apply sup_le
-    · simpa only [Scheme.IdealSheafData.ker_subschemeι] using
-        f.hom.left.le_ker_comp I.subschemeι
+    · exact (I.ker_subschemeι).symm.le.trans (f.hom.left.le_ker_comp I.subschemeι)
     · have hw : f.hom.left ≫ I.subschemeι = g.hom.left ≫ J.subschemeι :=
         (forget k).congr_map w
       rw [hw]
-      simpa only [Scheme.IdealSheafData.ker_subschemeι] using
-        g.hom.left.le_ker_comp J.subschemeι)
+      exact (J.ker_subschemeι).symm.le.trans (g.hom.left.le_ker_comp J.subschemeι))
 
 @[reassoc (attr := simp)]
 lemma closedSubschemeIntersectionLift_ι (Y : Variety k) (I J : Y.toScheme.IdealSheafData)
