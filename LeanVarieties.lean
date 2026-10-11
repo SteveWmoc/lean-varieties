@@ -16,3 +16,4 @@ import LeanVarieties.ClosedSubscheme
 import LeanVarieties.ClosedSubschemeInclusions
 import LeanVarieties.ClosedSubschemeZero
 import LeanVarieties.ClosedSubschemeIntersection
+import LeanVarieties.ClosedSubschemePullback

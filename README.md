@@ -29,6 +29,8 @@ The library currently provides:
   The zero ideal recovers the ambient variety by a canonical isomorphism.
   Ideal sums define scheme-theoretic intersections, with closed-immersion
   projections and unique lifts of compatible maps into both factors.
+  These intersections also carry mathlib pullback witnesses and canonical
+  comparison isomorphisms to its chosen pullbacks.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -93,6 +95,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemeInclusions](LeanVarieties/ClosedSubschemeInclusions.lean) | Canonical inclusions and the ideal-sheaf functor |
 | [ClosedSubschemeZero](LeanVarieties/ClosedSubschemeZero.lean) | The zero-ideal subscheme and its ambient isomorphism |
 | [ClosedSubschemeIntersection](LeanVarieties/ClosedSubschemeIntersection.lean) | Scheme-theoretic intersections and their universal property |
+| [ClosedSubschemePullback](LeanVarieties/ClosedSubschemePullback.lean) | Standard pullback witnesses, comparison isomorphisms, and lift compatibility |
 
 ## Documentation and checks
 
