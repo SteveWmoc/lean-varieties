@@ -19,3 +19,4 @@ linked where it resolves an earlier boundary. The semantic convention in ADR
 | Isomorphisms | [0015: Invariance of geometric properties](0015-isomorphism-invariance.md) |
 | Closed subschemes | [0016: Construction](0016-closed-subscheme-construction.md), [0017: Inclusions and functoriality](0017-closed-subscheme-inclusions.md), [0018: The zero ideal](0018-zero-ideal-subscheme.md) |
 | Intersections | [0019: Scheme-theoretic intersections](0019-closed-subscheme-intersections.md) |
+| Categorical pullbacks | [0020: Intersection pullback API](0020-intersection-pullbacks.md) |
