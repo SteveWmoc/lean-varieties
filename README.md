@@ -30,7 +30,9 @@ The library currently provides:
   Ideal sums define scheme-theoretic intersections, with closed-immersion
   projections and unique lifts of compatible maps into both factors.
   These intersections also carry mathlib pullback witnesses and canonical
-  comparison isomorphisms to its chosen pullbacks.
+  comparison isomorphisms to its chosen pullbacks. Canonical symmetry swaps
+  their projections; absorption recovers a subscheme already contained in
+  the other factor, including self-intersections.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -96,6 +98,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemeZero](LeanVarieties/ClosedSubschemeZero.lean) | The zero-ideal subscheme and its ambient isomorphism |
 | [ClosedSubschemeIntersection](LeanVarieties/ClosedSubschemeIntersection.lean) | Scheme-theoretic intersections and their universal property |
 | [ClosedSubschemePullback](LeanVarieties/ClosedSubschemePullback.lean) | Standard pullback witnesses, comparison isomorphisms, and lift compatibility |
+| [ClosedSubschemeIntersectionLaws](LeanVarieties/ClosedSubschemeIntersectionLaws.lean) | Symmetry, absorption, and self-intersection isomorphisms |
 
 ## Documentation and checks
 
