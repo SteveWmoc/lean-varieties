@@ -81,9 +81,10 @@ lemma closedSubschemeIntersectionAbsorption_inv_snd (Y : Variety k)
     (closedSubschemeIntersectionAbsorption Y I J h).inv ≫
       closedSubschemeIntersectionSnd Y I J = closedSubschemeInclusion Y h := by
   apply closedSubscheme_hom_ext Y J
-  change closedSubschemeInclusion Y (sup_le le_rfl h) ≫
-    closedSubschemeIntersectionSnd Y I J ≫ closedSubschemeι Y J = _
-  simp
+  change (closedSubschemeInclusion Y (sup_le le_rfl h) ≫
+    closedSubschemeIntersectionSnd Y I J) ≫ closedSubschemeι Y J = _
+  rw [Category.assoc, closedSubschemeIntersectionSnd_ι,
+    closedSubschemeInclusion_ι, closedSubschemeInclusion_ι]
 
 /-- Intersecting a closed subscheme with itself recovers that subscheme. -/
 def closedSubschemeIntersectionSelfIso (Y : Variety k) (I : Y.toScheme.IdealSheafData) :
