@@ -20,3 +20,4 @@ linked where it resolves an earlier boundary. The semantic convention in ADR
 | Closed subschemes | [0016: Construction](0016-closed-subscheme-construction.md), [0017: Inclusions and functoriality](0017-closed-subscheme-inclusions.md), [0018: The zero ideal](0018-zero-ideal-subscheme.md) |
 | Intersections | [0019: Scheme-theoretic intersections](0019-closed-subscheme-intersections.md), [0021: Symmetry and absorption](0021-intersection-laws.md) |
 | Categorical pullbacks | [0020: Intersection pullback API](0020-intersection-pullbacks.md) |
+| Inverse images | [0022: Construction and canonical maps](0022-closed-subscheme-preimages.md) |
