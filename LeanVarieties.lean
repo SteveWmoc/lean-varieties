@@ -18,3 +18,4 @@ import LeanVarieties.ClosedSubschemeZero
 import LeanVarieties.ClosedSubschemeIntersection
 import LeanVarieties.ClosedSubschemePullback
 import LeanVarieties.ClosedSubschemeIntersectionLaws
+import LeanVarieties.ClosedSubschemePreimage

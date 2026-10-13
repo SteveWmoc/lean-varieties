@@ -32,7 +32,8 @@ The library currently provides:
   These intersections also carry mathlib pullback witnesses and canonical
   comparison isomorphisms to its chosen pullbacks. Canonical symmetry swaps
   their projections; absorption recovers a subscheme already contained in
-  the other factor, including self-intersections.
+  the other factor, including self-intersections. Inverse images along variety
+  morphisms come with their canonical commuting square and support formula.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -99,6 +100,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemeIntersection](LeanVarieties/ClosedSubschemeIntersection.lean) | Scheme-theoretic intersections and their universal property |
 | [ClosedSubschemePullback](LeanVarieties/ClosedSubschemePullback.lean) | Standard pullback witnesses, comparison isomorphisms, and lift compatibility |
 | [ClosedSubschemeIntersectionLaws](LeanVarieties/ClosedSubschemeIntersectionLaws.lean) | Symmetry, absorption, and self-intersection isomorphisms |
+| [ClosedSubschemePreimage](LeanVarieties/ClosedSubschemePreimage.lean) | Inverse images, canonical maps, and their underlying closed sets |
 
 ## Documentation and checks
 
