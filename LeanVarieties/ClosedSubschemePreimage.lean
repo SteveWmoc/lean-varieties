@@ -69,7 +69,8 @@ lemma closedSubschemePreimageMap_ι (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData
     closedSubschemePreimageMap f I ≫ closedSubschemeι Y I =
       closedSubschemePreimageι f I ≫ f := by
   apply (forget k).map_injective
-  exact Scheme.IdealSheafData.subschemeMap_subschemeι _ _ _ _
+  exact Scheme.IdealSheafData.subschemeMap_subschemeι (I.comap f.hom.left) I f.hom.left
+    (I.le_map_comap f.hom.left)
 
 /-- The underlying closed set of the scheme-theoretic inverse image is the preimage
 of the original ideal's support. -/
