@@ -6,7 +6,7 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 Pull back ideal-sheaf data along a variety morphism and package the resulting
 closed subscheme over the same base field. The canonical maps form a commuting
-square; the categorical universal property is left to a subsequent module.
+square; `ClosedSubschemePreimagePullback` proves its categorical universal property.
 -/
 
 namespace LeanVarieties

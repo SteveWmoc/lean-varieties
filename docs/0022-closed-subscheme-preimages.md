@@ -20,4 +20,5 @@ Smoothness is not automatic and no smoothness instance is supplied.
 
 Mathlib constructs the ideal using a scheme pullback and supplies a comparison
 isomorphism. This module packages the object and maps in `Variety k`; the
-pullback universal property in that category is the next slice.
+pullback universal property in that category is proved in
+[note 0023](0023-preimage-pullbacks.md).
