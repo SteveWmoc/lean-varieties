@@ -26,9 +26,11 @@ def closedSubschemePreimageLift (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
     {T : Variety k} (a : T ⟶ X) (b : T ⟶ closedSubscheme Y I)
     (w : a ≫ f = b ≫ closedSubschemeι Y I) : T ⟶ closedSubschemePreimage f I :=
   ObjectProperty.homMk (Over.homMk
-    (pullback.lift a.hom.left b.hom.left ((forget k).congr_map w) ≫
+    (pullback.lift (f := f.hom.left) (g := I.subschemeι) a.hom.left
+      (show T.toScheme ⟶ I.subscheme from b.hom.left) ((forget k).congr_map w) ≫
       (I.comapIso f.hom.left).inv) (by
-      change (pullback.lift a.hom.left b.hom.left _ ≫ (I.comapIso f.hom.left).inv) ≫
+      change (pullback.lift (f := f.hom.left) (g := I.subschemeι) a.hom.left
+        (show T.toScheme ⟶ I.subscheme from b.hom.left) _ ≫ (I.comapIso f.hom.left).inv) ≫
         ((I.comap f.hom.left).subschemeι ≫ X.structureMap) = T.structureMap
       rw [Category.assoc, ← Category.assoc (I.comapIso f.hom.left).inv,
         Scheme.IdealSheafData.comapIso_inv_subschemeι, ← Category.assoc,
@@ -41,7 +43,8 @@ lemma closedSubschemePreimageLift_ι (f : X ⟶ Y) (I : Y.toScheme.IdealSheafDat
     (w : a ≫ f = b ≫ closedSubschemeι Y I) :
     closedSubschemePreimageLift f I a b w ≫ closedSubschemePreimageι f I = a := by
   apply (forget k).map_injective
-  change (pullback.lift a.hom.left b.hom.left _ ≫ (I.comapIso f.hom.left).inv) ≫
+  change (pullback.lift (f := f.hom.left) (g := I.subschemeι) a.hom.left
+        (show T.toScheme ⟶ I.subscheme from b.hom.left) _ ≫ (I.comapIso f.hom.left).inv) ≫
     (I.comap f.hom.left).subschemeι = a.hom.left
   rw [Category.assoc, Scheme.IdealSheafData.comapIso_inv_subschemeι, pullback.lift_fst]
 
