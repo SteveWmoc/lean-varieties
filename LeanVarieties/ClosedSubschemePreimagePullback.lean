@@ -34,7 +34,7 @@ def closedSubschemePreimageLift (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
         ((I.comap f.hom.left).subschemeι ≫ X.structureMap) = T.structureMap
       rw [Category.assoc, ← Category.assoc (I.comapIso f.hom.left).inv,
         Scheme.IdealSheafData.comapIso_inv_subschemeι, ← Category.assoc,
-        pullback.lift_fst]
+        pullback.lift_fst (f := f.hom.left) (g := I.subschemeι)]
       exact Over.w a.hom))
 
 @[reassoc (attr := simp)]
@@ -46,7 +46,8 @@ lemma closedSubschemePreimageLift_ι (f : X ⟶ Y) (I : Y.toScheme.IdealSheafDat
   change (pullback.lift (f := f.hom.left) (g := I.subschemeι) a.hom.left
         (show T.toScheme ⟶ I.subscheme from b.hom.left) _ ≫ (I.comapIso f.hom.left).inv) ≫
     (I.comap f.hom.left).subschemeι = a.hom.left
-  rw [Category.assoc, Scheme.IdealSheafData.comapIso_inv_subschemeι, pullback.lift_fst]
+  rw [Category.assoc, Scheme.IdealSheafData.comapIso_inv_subschemeι,
+    pullback.lift_fst (f := f.hom.left) (g := I.subschemeι)]
 
 @[reassoc (attr := simp)]
 lemma closedSubschemePreimageLift_map (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
