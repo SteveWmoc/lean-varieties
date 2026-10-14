@@ -21,6 +21,12 @@ namespace Variety
 
 variable {k : Type u} [Field k] {X Y : Variety k}
 
+private lemma schemePreimageLift_fst (f : X.toScheme ⟶ Y.toScheme)
+    (I : Y.toScheme.IdealSheafData) {T : Scheme.{u}}
+    (a : T ⟶ X.toScheme) (b : T ⟶ I.subscheme) (w : a ≫ f = b ≫ I.subschemeι) :
+    (pullback.lift a b w ≫ (I.comapIso f).inv) ≫ (I.comap f).subschemeι = a := by
+  rw [Category.assoc, Scheme.IdealSheafData.comapIso_inv_subschemeι, pullback.lift_fst]
+
 /-- Lift compatible maps to the scheme-theoretic inverse image, over the base field. -/
 def closedSubschemePreimageLift (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
     {T : Variety k} (a : T ⟶ X) (b : T ⟶ closedSubscheme Y I)
@@ -32,10 +38,10 @@ def closedSubschemePreimageLift (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
       change (pullback.lift (f := f.hom.left) (g := I.subschemeι) a.hom.left
         (show T.toScheme ⟶ I.subscheme from b.hom.left) _ ≫ (I.comapIso f.hom.left).inv) ≫
         ((I.comap f.hom.left).subschemeι ≫ X.structureMap) = T.structureMap
-      rw [Category.assoc, ← Category.assoc (I.comapIso f.hom.left).inv,
-        Scheme.IdealSheafData.comapIso_inv_subschemeι, ← Category.assoc,
-        pullback.lift_fst (f := f.hom.left) (g := I.subschemeι)]
-      exact Over.w a.hom))
+      exact (Category.assoc _ _ _).symm.trans
+        ((congrArg (fun q => q ≫ X.structureMap)
+          (schemePreimageLift_fst f.hom.left I a.hom.left b.hom.left
+            ((forget k).congr_map w))).trans (Over.w a.hom))))
 
 @[reassoc (attr := simp)]
 lemma closedSubschemePreimageLift_ι (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
@@ -46,8 +52,7 @@ lemma closedSubschemePreimageLift_ι (f : X ⟶ Y) (I : Y.toScheme.IdealSheafDat
   change (pullback.lift (f := f.hom.left) (g := I.subschemeι) a.hom.left
         (show T.toScheme ⟶ I.subscheme from b.hom.left) _ ≫ (I.comapIso f.hom.left).inv) ≫
     (I.comap f.hom.left).subschemeι = a.hom.left
-  rw [Category.assoc, Scheme.IdealSheafData.comapIso_inv_subschemeι,
-    pullback.lift_fst (f := f.hom.left) (g := I.subschemeι)]
+  exact schemePreimageLift_fst f.hom.left I a.hom.left b.hom.left ((forget k).congr_map w)
 
 @[reassoc (attr := simp)]
 lemma closedSubschemePreimageLift_map (f : X ⟶ Y) (I : Y.toScheme.IdealSheafData)
