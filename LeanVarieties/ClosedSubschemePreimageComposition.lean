@@ -100,9 +100,6 @@ lemma closedSubschemePreimageCompIso_hom_map (f : X ⟶ Y) (g : Y ⟶ Z)
       closedSubschemePreimageMap f (I.comap g.hom.left) ≫ closedSubschemePreimageMap g I =
         closedSubschemePreimageMap (f ≫ g) I := by
   apply closedSubscheme_hom_ext Z I
-  change ((closedSubschemePreimageCompIso f g I).hom ≫
-    closedSubschemePreimageMap f (I.comap g.hom.left) ≫ closedSubschemePreimageMap g I) ≫
-      closedSubschemeι Z I = _
   simp only [Category.assoc, closedSubschemePreimageMap_ι]
   change (closedSubschemePreimageCompIso f g I).hom ≫
     closedSubschemePreimageMap f (I.comap g.hom.left) ≫
