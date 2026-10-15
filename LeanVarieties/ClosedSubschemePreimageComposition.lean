@@ -103,8 +103,11 @@ lemma closedSubschemePreimageCompIso_hom_map (f : X ⟶ Y) (g : Y ⟶ Z)
   change ((closedSubschemePreimageCompIso f g I).hom ≫
     closedSubschemePreimageMap f (I.comap g.hom.left) ≫ closedSubschemePreimageMap g I) ≫
       closedSubschemeι Z I = _
-  simp only [Category.assoc, closedSubschemePreimageMap_ι,
-    closedSubschemePreimageCompIso_hom_ι_assoc]
+  simp only [Category.assoc, closedSubschemePreimageMap_ι]
+  change (closedSubschemePreimageCompIso f g I).hom ≫
+    closedSubschemePreimageMap f (I.comap g.hom.left) ≫
+      closedSubschemeι Y (I.comap g.hom.left) ≫ g = _
+  rw [closedSubschemePreimageMap_ι_assoc, closedSubschemePreimageCompIso_hom_ι_assoc]
 
 /-- The inverse comparison also respects the maps to the original subscheme. -/
 @[reassoc (attr := simp)]
