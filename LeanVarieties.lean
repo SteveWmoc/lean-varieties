@@ -20,3 +20,4 @@ import LeanVarieties.ClosedSubschemePullback
 import LeanVarieties.ClosedSubschemeIntersectionLaws
 import LeanVarieties.ClosedSubschemePreimage
 import LeanVarieties.ClosedSubschemePreimagePullback
+import LeanVarieties.ClosedSubschemePreimageComposition
