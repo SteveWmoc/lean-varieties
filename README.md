@@ -35,7 +35,8 @@ The library currently provides:
   the other factor, including self-intersections. Inverse images along variety
   morphisms come with their canonical commuting square and support formula,
   unique compatible lifts, and categorical pullback witnesses. Canonical
-  isomorphisms identify inverse images along identities and composites.
+  isomorphisms identify inverse images along identities and composites,
+  and identify inverse images of intersections with intersections of inverse images.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -105,6 +106,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemePreimage](LeanVarieties/ClosedSubschemePreimage.lean) | Inverse images, canonical maps, and their underlying closed sets |
 | [ClosedSubschemePreimagePullback](LeanVarieties/ClosedSubschemePreimagePullback.lean) | Inverse-image lifts, uniqueness, and the categorical pullback API |
 | [ClosedSubschemePreimageComposition](LeanVarieties/ClosedSubschemePreimageComposition.lean) | Identity and composition isomorphisms respecting canonical maps |
+| [ClosedSubschemePreimageIntersection](LeanVarieties/ClosedSubschemePreimageIntersection.lean) | Inverse images preserve intersections and their projection maps |
 
 ## Documentation and checks
 
