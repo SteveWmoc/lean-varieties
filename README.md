@@ -37,6 +37,8 @@ The library currently provides:
   unique compatible lifts, and categorical pullback witnesses. Canonical
   isomorphisms identify inverse images along identities and composites,
   and identify inverse images of intersections with intersections of inverse images.
+  Inverse images form a functor on the opposite ideal poset, with natural
+  restriction maps and a natural identity comparison.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -107,6 +109,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemePreimagePullback](LeanVarieties/ClosedSubschemePreimagePullback.lean) | Inverse-image lifts, uniqueness, and the categorical pullback API |
 | [ClosedSubschemePreimageComposition](LeanVarieties/ClosedSubschemePreimageComposition.lean) | Identity and composition isomorphisms respecting canonical maps |
 | [ClosedSubschemePreimageIntersection](LeanVarieties/ClosedSubschemePreimageIntersection.lean) | Inverse images preserve intersections and their projection maps |
+| [ClosedSubschemePreimageFunctor](LeanVarieties/ClosedSubschemePreimageFunctor.lean) | Functorial inverse images, natural restriction, and the natural identity comparison |
 
 ## Documentation and checks
 
