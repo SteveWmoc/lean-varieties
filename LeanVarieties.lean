@@ -22,3 +22,4 @@ import LeanVarieties.ClosedSubschemePreimage
 import LeanVarieties.ClosedSubschemePreimagePullback
 import LeanVarieties.ClosedSubschemePreimageComposition
 import LeanVarieties.ClosedSubschemePreimageIntersection
+import LeanVarieties.ClosedSubschemePreimageFunctor
