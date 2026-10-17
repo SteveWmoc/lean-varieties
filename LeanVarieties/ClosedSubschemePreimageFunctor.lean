@@ -61,37 +61,53 @@ lemma closedSubschemePreimageRestriction_app (f : X ⟶ Y)
 
 /-- The identity comparison is natural with respect to closed-subscheme inclusions. -/
 def closedSubschemePreimageIdNatIso (X : Variety k) :
-    closedSubschemePreimageFunctor (𝟙 X) ≅ closedSubschemeFunctor X :=
-  NatIso.ofComponents (fun I => closedSubschemePreimageIdIso X I.unop) (by
-    intro I J a
-    change closedSubschemePreimageInclusion (𝟙 X) a.unop.le ≫
-      (closedSubschemePreimageIdIso X J.unop).hom =
-        (closedSubschemePreimageIdIso X I.unop).hom ≫ closedSubschemeInclusion X a.unop.le
-    rw [closedSubschemePreimageIdIso_hom, closedSubschemePreimageIdIso_hom]
-    exact closedSubschemePreimageInclusion_map (𝟙 X) a.unop.le)
+    closedSubschemePreimageFunctor (𝟙 X) ≅ closedSubschemeFunctor X where
+  hom := closedSubschemePreimageRestriction (𝟙 X)
+  inv :=
+    { app := fun I => (closedSubschemePreimageIdIso X I.unop).inv
+      naturality := by
+        intro I J a
+        apply closedSubschemePreimage_hom_ext (𝟙 X) J.unop
+        change (closedSubschemeInclusion X a.unop.le ≫
+          (closedSubschemePreimageIdIso X J.unop).inv) ≫
+            closedSubschemePreimageι (𝟙 X) J.unop =
+              ((closedSubschemePreimageIdIso X I.unop).inv ≫
+                closedSubschemePreimageInclusion (𝟙 X) a.unop.le) ≫
+                  closedSubschemePreimageι (𝟙 X) J.unop
+        rw [Category.assoc, closedSubschemePreimageIdIso_inv_ι,
+          closedSubschemeInclusion_ι, Category.assoc,
+          closedSubschemePreimageInclusion_ι, closedSubschemePreimageIdIso_inv_ι] }
+  hom_inv_id := by
+    ext I
+    change closedSubschemePreimageMap (𝟙 X) I.unop ≫
+      (closedSubschemePreimageIdIso X I.unop).inv = 𝟙 _
+    rw [← closedSubschemePreimageIdIso_hom]
+    exact (closedSubschemePreimageIdIso X I.unop).hom_inv_id
+  inv_hom_id := by
+    ext I
+    change (closedSubschemePreimageIdIso X I.unop).inv ≫
+      closedSubschemePreimageMap (𝟙 X) I.unop = 𝟙 _
+    rw [← closedSubschemePreimageIdIso_hom]
+    exact (closedSubschemePreimageIdIso X I.unop).inv_hom_id
 
 @[simp]
 lemma closedSubschemePreimageIdNatIso_hom_app (X : Variety k)
     (I : (X.toScheme.IdealSheafData)ᵒᵖ) :
     (closedSubschemePreimageIdNatIso X).hom.app I =
       (closedSubschemePreimageIdIso X I.unop).hom := by
-  unfold closedSubschemePreimageIdNatIso
-  rfl
+  change closedSubschemePreimageMap (𝟙 X) I.unop = _
+  exact (closedSubschemePreimageIdIso_hom X I.unop).symm
 
 @[simp]
 lemma closedSubschemePreimageIdNatIso_inv_app (X : Variety k)
     (I : (X.toScheme.IdealSheafData)ᵒᵖ) :
     (closedSubschemePreimageIdNatIso X).inv.app I =
       (closedSubschemePreimageIdIso X I.unop).inv := by
-  unfold closedSubschemePreimageIdNatIso
   rfl
 
 /-- The natural identity comparison has the canonical restriction transformation as its hom. -/
 lemma closedSubschemePreimageIdNatIso_hom (X : Variety k) :
-    (closedSubschemePreimageIdNatIso X).hom = closedSubschemePreimageRestriction (𝟙 X) := by
-  ext I
-  rw [closedSubschemePreimageIdNatIso_hom_app, closedSubschemePreimageRestriction_app]
-  exact closedSubschemePreimageIdIso_hom X I.unop
+    (closedSubschemePreimageIdNatIso X).hom = closedSubschemePreimageRestriction (𝟙 X) := rfl
 
 end Variety
 
