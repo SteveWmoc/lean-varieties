@@ -50,7 +50,9 @@ def closedSubschemePreimageFunctor (f : X ⟶ Y) :
 def closedSubschemePreimageRestriction (f : X ⟶ Y) :
     closedSubschemePreimageFunctor f ⟶ closedSubschemeFunctor Y where
   app I := closedSubschemePreimageMap f I.unop
-  naturality a := closedSubschemePreimageInclusion_map f a.unop.le
+  naturality := by
+    intro I J a
+    exact closedSubschemePreimageInclusion_map f a.unop.le
 
 @[simp]
 lemma closedSubschemePreimageRestriction_app (f : X ⟶ Y)
