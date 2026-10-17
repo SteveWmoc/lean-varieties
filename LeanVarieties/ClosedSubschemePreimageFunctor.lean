@@ -80,15 +80,13 @@ def closedSubschemePreimageIdNatIso (X : Variety k) :
   hom_inv_id := by
     apply NatTrans.ext
     funext I
-    change closedSubschemePreimageMap (𝟙 X) I.unop ≫
-      (closedSubschemePreimageIdIso X I.unop).inv = 𝟙 _
+    dsimp only [NatTrans.comp_app, NatTrans.id_app, closedSubschemePreimageRestriction]
     rw [← closedSubschemePreimageIdIso_hom]
     exact (closedSubschemePreimageIdIso X I.unop).hom_inv_id
   inv_hom_id := by
     apply NatTrans.ext
     funext I
-    change (closedSubschemePreimageIdIso X I.unop).inv ≫
-      closedSubschemePreimageMap (𝟙 X) I.unop = 𝟙 _
+    dsimp only [NatTrans.comp_app, NatTrans.id_app, closedSubschemePreimageRestriction]
     rw [← closedSubschemePreimageIdIso_hom]
     exact (closedSubschemePreimageIdIso X I.unop).inv_hom_id
 
