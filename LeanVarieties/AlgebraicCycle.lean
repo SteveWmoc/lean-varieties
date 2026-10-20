@@ -38,9 +38,9 @@ lemma ext {c d : X.Cycle} (h : ∀ x, c x = d x) : c = d :=
 
 /-- A variety is quasi-compact, so every cycle has only finitely many nonzero coefficients. -/
 lemma finite_support (c : X.Cycle) : (Function.support c).Finite := by
-  letI : CompactSpace X.toScheme :=
+  have : CompactSpace X.toScheme :=
     QuasiCompact.compactSpace_of_compactSpace X.structureMap
-  simpa only [Set.univ_inter] using
+  simpa only [Set.univ_inter, Function.locallyFinsuppWithin.toFun_eq_coe] using
     c.locallyFiniteSupport.finite_inter_support_of_isCompact isCompact_univ
 
 /-- A cycle with one specified coefficient at a generic point. -/
