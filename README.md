@@ -40,14 +40,17 @@ The library currently provides:
   Inverse images form a functor on the opposite ideal poset, with natural
   restriction maps and a natural identity comparison.
 
+- Integer algebraic cycles using mathlib’s generic-point representation, finite
+  support and finite-sum reconstruction, and effective cycles.
+
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
 `SmoothOfRelativeDimension`, rather than a general dimension invariant for
 singular schemes. Closed subschemes can be singular or nonreduced, so their
 smoothness and dimension require separate hypotheses.
 
-Cycles, Chow groups, analytification, cohomology, Hodge structures, and a
-statement of the Hodge conjecture are still outside the implemented API.
+Codimension-graded cycles, Chow groups, analytification, cohomology, Hodge
+structures, and a statement of the Hodge conjecture remain outside the API.
 
 ## Build and use
 
@@ -110,6 +113,8 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemePreimageComposition](LeanVarieties/ClosedSubschemePreimageComposition.lean) | Identity and composition isomorphisms respecting canonical maps |
 | [ClosedSubschemePreimageIntersection](LeanVarieties/ClosedSubschemePreimageIntersection.lean) | Inverse images preserve intersections and their projection maps |
 | [ClosedSubschemePreimageFunctor](LeanVarieties/ClosedSubschemePreimageFunctor.lean) | Functorial inverse images, natural restriction, and the natural identity comparison |
+
+| [AlgebraicCycle](LeanVarieties/AlgebraicCycle.lean) | Ungraded integer cycles, finite support, generators, and effectivity |
 
 ## Documentation and checks
 
