@@ -74,7 +74,7 @@ lemma single_one_mem_supportedOn_iff (S : Set X.toScheme) (x : X.toScheme) :
   · intro h
     by_contra hx
     have hz := h x hx
-    simpa using hz
+    simp at hz
   · exact single_mem_supportedOn S x 1
 
 end Cycle
