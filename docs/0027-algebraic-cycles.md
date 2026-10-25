@@ -33,9 +33,11 @@ and nonnegative single generators preserve effectivity.
 
 ## Scope toward Hodge theory
 
-These cycles are **ungraded**: neither dimension nor codimension is imposed.
+The ambient cycle group is **ungraded**: neither dimension nor codimension
+is imposed. [Note 0028](0028-cycle-codimension.md) defines its fixed-codimension
+subgroups.
 The current smooth-relative-dimension API is not used to assign dimensions
-to possibly singular cycle generators. Codimension grading, multiplicities
+to possibly singular cycle generators. A direct-sum grading theorem, multiplicities
 of general closed subschemes, rational equivalence, Chow groups, geometric
 pushforward/pullback wrappers, and cycle classes in cohomology remain future
 work. In particular, scheme-theoretic inverse images from earlier modules

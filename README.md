@@ -41,7 +41,8 @@ The library currently provides:
   restriction maps and a natural identity comparison.
 
 - Integer algebraic cycles using mathlib’s generic-point representation, finite
-  support and finite-sum reconstruction, and effective cycles.
+  support and finite-sum reconstruction, and effective cycles. Codimension-`p`
+  cycles form additive subgroups, using coheight of irreducible closed subsets.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -49,8 +50,9 @@ projective space; it implies properness. Fixed dimension uses mathlib's
 singular schemes. Closed subschemes can be singular or nonreduced, so their
 smoothness and dimension require separate hypotheses.
 
-Codimension-graded cycles, Chow groups, analytification, cohomology, Hodge
-structures, and a statement of the Hodge conjecture remain outside the API.
+Chow groups, analytification, cohomology, Hodge structures, and a statement
+of the Hodge conjecture remain outside the API. A direct-sum decomposition
+by codimension and comparisons with other dimension conventions are not yet proved.
 
 ## Build and use
 
@@ -115,6 +117,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemePreimageFunctor](LeanVarieties/ClosedSubschemePreimageFunctor.lean) | Functorial inverse images, natural restriction, and the natural identity comparison |
 
 | [AlgebraicCycle](LeanVarieties/AlgebraicCycle.lean) | Ungraded integer cycles, finite support, generators, and effectivity |
+| [CycleCodimension](LeanVarieties/CycleCodimension.lean) | Codimension via irreducible closed chains and fixed-codimension cycle subgroups |
 
 ## Documentation and checks
 
