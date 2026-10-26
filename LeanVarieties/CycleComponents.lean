@@ -55,6 +55,7 @@ lemma component_apply (d : ℕ∞) (c : X.Cycle) (x : X.toScheme) :
 lemma component_mem_codimensionCycles (p : ℕ) (c : X.Cycle) :
     component X (p : ℕ∞) c ∈ codimensionCycles X p := by
   intro x hx
+  change generatorCodimension x ≠ (p : ℕ∞) at hx
   simp [hx]
 
 /-- A cycle already supported in degree `p` is fixed by its degree-`p` projection. -/
@@ -80,10 +81,7 @@ lemma component_component_of_ne {d e : ℕ∞} (hde : d ≠ e) (c : X.Cycle) :
   apply Cycle.ext
   intro x
   by_cases hx : generatorCodimension x = d
-  · have hxe : generatorCodimension x ≠ e := by
-      intro h
-      exact hde (hx.symm.trans h)
-    simp [hx, hxe]
+  · simp [hx, hde]
   · simp [hx]
 
 /-- Components preserve effectivity because they only discard coefficients. -/
