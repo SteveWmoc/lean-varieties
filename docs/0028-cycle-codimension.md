@@ -31,6 +31,8 @@ and integer scalar multiplication are inherited from `AddSubgroup`.
 generators have degree `p`. A cycle belonging to two distinct finite degrees
 is zero, by `eq_zero_of_mem_codimensionCycles_of_ne`.
 
-The API does not yet establish finiteness of every generator's codimension,
+[Note 0029](0029-cycle-components.md) adds component projections and finite
+reconstruction indexed by `ℕ∞`. The API does not yet establish finiteness
+of every generator's codimension,
 a direct-sum decomposition of all cycles, dimension formulas for affine or
 projective spaces, rational equivalence, or cycle classes in cohomology.
