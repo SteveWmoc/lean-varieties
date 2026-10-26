@@ -43,6 +43,8 @@ The library currently provides:
 - Integer algebraic cycles using mathlib’s generic-point representation, finite
   support and finite-sum reconstruction, and effective cycles. Codimension-`p`
   cycles form additive subgroups, using coheight of irreducible closed subsets.
+  Additive component projections are idempotent, annihilate distinct degrees,
+  and reconstruct each cycle by a finite sum over degrees in `ℕ∞`.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -51,8 +53,10 @@ singular schemes. Closed subschemes can be singular or nonreduced, so their
 smoothness and dimension require separate hypotheses.
 
 Chow groups, analytification, cohomology, Hodge structures, and a statement
-of the Hodge conjecture remain outside the API. A direct-sum decomposition
-by codimension and comparisons with other dimension conventions are not yet proved.
+of the Hodge conjecture remain outside the API. Reconstruction includes a
+possible infinite-codimension component; finiteness of all generator codimensions,
+a bundled direct-sum equivalence, and comparisons with other dimension conventions
+are not yet proved.
 
 ## Build and use
 
@@ -118,6 +122,7 @@ All module names below have the prefix `LeanVarieties.`.
 
 | [AlgebraicCycle](LeanVarieties/AlgebraicCycle.lean) | Ungraded integer cycles, finite support, generators, and effectivity |
 | [CycleCodimension](LeanVarieties/CycleCodimension.lean) | Codimension via irreducible closed chains and fixed-codimension cycle subgroups |
+| [CycleComponents](LeanVarieties/CycleComponents.lean) | Additive codimension projections and finite reconstruction including infinity |
 
 ## Documentation and checks
 

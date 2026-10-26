@@ -25,3 +25,4 @@ import LeanVarieties.ClosedSubschemePreimageIntersection
 import LeanVarieties.ClosedSubschemePreimageFunctor
 import LeanVarieties.AlgebraicCycle
 import LeanVarieties.CycleCodimension
+import LeanVarieties.CycleComponents
