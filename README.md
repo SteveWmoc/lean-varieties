@@ -45,6 +45,8 @@ The library currently provides:
   cycles form additive subgroups, using coheight of irreducible closed subsets.
   Additive component projections are idempotent, annihilate distinct degrees,
   and reconstruct each cycle by a finite sum over degrees in `ℕ∞`.
+  Homogeneous finite sums have unique summands recovered by the projections;
+  equality and effectivity can be checked componentwise.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -123,6 +125,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [AlgebraicCycle](LeanVarieties/AlgebraicCycle.lean) | Ungraded integer cycles, finite support, generators, and effectivity |
 | [CycleCodimension](LeanVarieties/CycleCodimension.lean) | Codimension via irreducible closed chains and fixed-codimension cycle subgroups |
 | [CycleComponents](LeanVarieties/CycleComponents.lean) | Additive codimension projections and finite reconstruction including infinity |
+| [CycleDecomposition](LeanVarieties/CycleDecomposition.lean) | Homogeneity, uniqueness of finite decompositions, and componentwise criteria |
 
 ## Documentation and checks
 
