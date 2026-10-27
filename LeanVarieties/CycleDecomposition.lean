@@ -50,7 +50,7 @@ lemma ext_of_components {c e : X.Cycle}
   apply Cycle.ext
   intro x
   have hx := congrArg (fun z : X.Cycle => z x) (h (generatorCodimension x))
-  simpa only [component_apply, if_pos rfl] using hx
+  simpa using hx
 
 /-- Effectivity can be checked independently in every degree. -/
 lemma isEffective_iff_components (c : X.Cycle) :
@@ -60,7 +60,7 @@ lemma isEffective_iff_components (c : X.Cycle) :
     exact hc.component d
   · intro h x
     have hx := h (generatorCodimension x) x
-    simpa only [component_apply, if_pos rfl] using hx
+    simpa using hx
 
 /-- Projection recovers the matching summand of a finite homogeneous sum. -/
 lemma component_sum_homogeneous (s : Finset ℕ∞) (f : ℕ∞ → X.Cycle)
@@ -68,7 +68,7 @@ lemma component_sum_homogeneous (s : Finset ℕ∞) (f : ℕ∞ → X.Cycle)
     component X d (∑ e ∈ s, f e) = if d ∈ s then f d else 0 := by
   rw [map_sum]
   by_cases hd : d ∈ s
-  · rw [if_pos hd]
+  · simp only [hd, ite_true]
     calc
       ∑ e ∈ s, component X d (f e) = component X d (f d) := by
         apply Finset.sum_eq_single d
@@ -77,7 +77,7 @@ lemma component_sum_homogeneous (s : Finset ℕ∞) (f : ℕ∞ → X.Cycle)
         · intro hds
           exact (hds hd).elim
       _ = f d := hf d hd
-  · rw [if_neg hd]
+  · simp only [hd, ite_false]
     apply Finset.sum_eq_zero
     intro e he
     apply (hf e he).component_eq_zero
@@ -89,8 +89,8 @@ lemma homogeneous_summand_eq_component (s : Finset ℕ∞) (f : ℕ∞ → X.Cyc
     (hf : ∀ e ∈ s, IsHomogeneous e (f e)) {c : X.Cycle}
     (hc : ∑ e ∈ s, f e = c) {d : ℕ∞} (hd : d ∈ s) : f d = component X d c := by
   have h := congrArg (component X d) hc
-  rw [component_sum_homogeneous s f hf d, if_pos hd] at h
-  exact h
+  rw [component_sum_homogeneous s f hf d] at h
+  simpa only [hd, ite_true] using h
 
 /-- Two homogeneous sums over the same finite set are equal exactly when their terms agree. -/
 lemma sum_homogeneous_eq_iff (s : Finset ℕ∞) (f g : ℕ∞ → X.Cycle)
@@ -100,7 +100,7 @@ lemma sum_homogeneous_eq_iff (s : Finset ℕ∞) (f g : ℕ∞ → X.Cycle)
   · intro h d hd
     have hp := congrArg (component X d) h
     simpa only [component_sum_homogeneous s f hf d,
-      component_sum_homogeneous s g hg d, if_pos hd] using hp
+      component_sum_homogeneous s g hg d, hd, ite_true] using hp
   · intro h
     exact Finset.sum_congr rfl h
 
