@@ -22,6 +22,7 @@ all their components. `isEffective_iff_components` similarly characterizes
 effectivity by the effectivity of every component.
 
 Together with `sum_components`, these results establish existence and
-uniqueness of finite homogeneous reconstruction. They do not yet package
-a direct-sum equivalence, exclude infinite-codimension generators, or define
+uniqueness of finite homogeneous reconstruction.
+[Note 0031](0031-cycle-direct-sum.md) packages the direct-sum equivalence.
+These results do not exclude infinite-codimension generators or define
 rational equivalence and Chow groups.
