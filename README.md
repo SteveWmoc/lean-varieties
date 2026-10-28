@@ -46,7 +46,8 @@ The library currently provides:
   Additive component projections are idempotent, annihilate distinct degrees,
   and reconstruct each cycle by a finite sum over degrees in `ℕ∞`.
   Homogeneous finite sums have unique summands recovered by the projections;
-  equality and effectivity can be checked componentwise.
+  equality and effectivity can be checked componentwise. The cycle group is
+  additively equivalent to the direct sum of its homogeneous subgroups over `ℕ∞`.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -57,8 +58,7 @@ smoothness and dimension require separate hypotheses.
 Chow groups, analytification, cohomology, Hodge structures, and a statement
 of the Hodge conjecture remain outside the API. Reconstruction includes a
 possible infinite-codimension component; finiteness of all generator codimensions,
-a bundled direct-sum equivalence, and comparisons with other dimension conventions
-are not yet proved.
+and comparisons with other dimension conventions are not yet proved.
 
 ## Build and use
 
@@ -126,6 +126,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [CycleCodimension](LeanVarieties/CycleCodimension.lean) | Codimension via irreducible closed chains and fixed-codimension cycle subgroups |
 | [CycleComponents](LeanVarieties/CycleComponents.lean) | Additive codimension projections and finite reconstruction including infinity |
 | [CycleDecomposition](LeanVarieties/CycleDecomposition.lean) | Homogeneity, uniqueness of finite decompositions, and componentwise criteria |
+| [CycleDirectSum](LeanVarieties/CycleDirectSum.lean) | Additive direct-sum equivalence with homogeneous cycle subgroups |
 
 ## Documentation and checks
 

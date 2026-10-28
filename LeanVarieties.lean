@@ -27,3 +27,4 @@ import LeanVarieties.AlgebraicCycle
 import LeanVarieties.CycleCodimension
 import LeanVarieties.CycleComponents
 import LeanVarieties.CycleDecomposition
+import LeanVarieties.CycleDirectSum
