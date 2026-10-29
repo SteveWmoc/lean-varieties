@@ -37,7 +37,8 @@ lemma geometricSupport_eq_iUnion (c : X.Cycle) :
 lemma geometricSupport_le_iff (c : X.Cycle) (Z : TopologicalSpace.Closeds X.toScheme) :
     geometricSupport c ≤ Z ↔ c ∈ supportedOn X (Z : Set X.toScheme) := by
   change closure (Function.support c) ⊆ (Z : Set X.toScheme) ↔ _
-  rw [closure_minimal_iff Z.isClosed, mem_supportedOn_iff_support_subset]
+  rw [mem_supportedOn_iff_support_subset]
+  exact ⟨fun h => subset_closure.trans h, fun h => closure_minimal h Z.isClosed⟩
 
 @[simp]
 lemma geometricSupport_zero : geometricSupport (0 : X.Cycle) = ⊥ := by
