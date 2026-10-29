@@ -83,7 +83,7 @@ lemma IsEffective.support_add {c e : X.Cycle} (hc : IsEffective c) (he : IsEffec
   constructor
   · intro h
     by_contra hn
-    push_neg at hn
+    push Not at hn
     exact h (by rw [hn.1, hn.2, add_zero])
   · intro h hz
     rcases h with h | h <;> omega
