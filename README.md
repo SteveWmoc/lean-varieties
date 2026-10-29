@@ -48,6 +48,8 @@ The library currently provides:
   Homogeneous finite sums have unique summands recovered by the projections;
   equality and effectivity can be checked componentwise. The cycle group is
   additively equivalent to the direct sum of its homogeneous subgroups over `ℕ∞`.
+  Geometric support is the finite union of the nonzero generators’ closures;
+  effective addition takes unions of supports without cancellation.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -127,6 +129,8 @@ All module names below have the prefix `LeanVarieties.`.
 | [CycleComponents](LeanVarieties/CycleComponents.lean) | Additive codimension projections and finite reconstruction including infinity |
 | [CycleDecomposition](LeanVarieties/CycleDecomposition.lean) | Homogeneity, uniqueness of finite decompositions, and componentwise criteria |
 | [CycleDirectSum](LeanVarieties/CycleDirectSum.lean) | Additive direct-sum equivalence with homogeneous cycle subgroups |
+
+| [CycleSupport](LeanVarieties/CycleSupport.lean) | Closed geometric support and effective addition without cancellation |
 
 ## Documentation and checks
 

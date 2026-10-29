@@ -28,3 +28,4 @@ import LeanVarieties.CycleCodimension
 import LeanVarieties.CycleComponents
 import LeanVarieties.CycleDecomposition
 import LeanVarieties.CycleDirectSum
+import LeanVarieties.CycleSupport
