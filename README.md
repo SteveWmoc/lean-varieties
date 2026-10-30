@@ -49,7 +49,9 @@ The library currently provides:
   equality and effectivity can be checked componentwise. The cycle group is
   additively equivalent to the direct sum of its homogeneous subgroups over `ℕ∞`.
   Geometric support is the finite union of the nonzero generators’ closures;
-  effective addition takes unions of supports without cancellation.
+  effective addition takes unions of supports without cancellation. Every cycle
+  has a unique difference presentation by effective cycles with disjoint
+  coefficient supports; positive and negative parts preserve codimension.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -123,14 +125,13 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemePreimageComposition](LeanVarieties/ClosedSubschemePreimageComposition.lean) | Identity and composition isomorphisms respecting canonical maps |
 | [ClosedSubschemePreimageIntersection](LeanVarieties/ClosedSubschemePreimageIntersection.lean) | Inverse images preserve intersections and their projection maps |
 | [ClosedSubschemePreimageFunctor](LeanVarieties/ClosedSubschemePreimageFunctor.lean) | Functorial inverse images, natural restriction, and the natural identity comparison |
-
 | [AlgebraicCycle](LeanVarieties/AlgebraicCycle.lean) | Ungraded integer cycles, finite support, generators, and effectivity |
 | [CycleCodimension](LeanVarieties/CycleCodimension.lean) | Codimension via irreducible closed chains and fixed-codimension cycle subgroups |
 | [CycleComponents](LeanVarieties/CycleComponents.lean) | Additive codimension projections and finite reconstruction including infinity |
 | [CycleDecomposition](LeanVarieties/CycleDecomposition.lean) | Homogeneity, uniqueness of finite decompositions, and componentwise criteria |
 | [CycleDirectSum](LeanVarieties/CycleDirectSum.lean) | Additive direct-sum equivalence with homogeneous cycle subgroups |
-
 | [CycleSupport](LeanVarieties/CycleSupport.lean) | Closed geometric support and effective addition without cancellation |
+| [CycleEffectiveDecomposition](LeanVarieties/CycleEffectiveDecomposition.lean) | Canonical positive and negative parts, uniqueness, support, and codimension |
 
 ## Documentation and checks
 
