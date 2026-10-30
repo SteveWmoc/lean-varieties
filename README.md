@@ -125,15 +125,12 @@ All module names below have the prefix `LeanVarieties.`.
 | [ClosedSubschemePreimageComposition](LeanVarieties/ClosedSubschemePreimageComposition.lean) | Identity and composition isomorphisms respecting canonical maps |
 | [ClosedSubschemePreimageIntersection](LeanVarieties/ClosedSubschemePreimageIntersection.lean) | Inverse images preserve intersections and their projection maps |
 | [ClosedSubschemePreimageFunctor](LeanVarieties/ClosedSubschemePreimageFunctor.lean) | Functorial inverse images, natural restriction, and the natural identity comparison |
-
 | [AlgebraicCycle](LeanVarieties/AlgebraicCycle.lean) | Ungraded integer cycles, finite support, generators, and effectivity |
 | [CycleCodimension](LeanVarieties/CycleCodimension.lean) | Codimension via irreducible closed chains and fixed-codimension cycle subgroups |
 | [CycleComponents](LeanVarieties/CycleComponents.lean) | Additive codimension projections and finite reconstruction including infinity |
 | [CycleDecomposition](LeanVarieties/CycleDecomposition.lean) | Homogeneity, uniqueness of finite decompositions, and componentwise criteria |
 | [CycleDirectSum](LeanVarieties/CycleDirectSum.lean) | Additive direct-sum equivalence with homogeneous cycle subgroups |
-
 | [CycleSupport](LeanVarieties/CycleSupport.lean) | Closed geometric support and effective addition without cancellation |
-
 | [CycleEffectiveDecomposition](LeanVarieties/CycleEffectiveDecomposition.lean) | Canonical positive and negative parts, uniqueness, support, and codimension |
 
 ## Documentation and checks
