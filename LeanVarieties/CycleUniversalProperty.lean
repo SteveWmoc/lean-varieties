@@ -29,7 +29,9 @@ def coefficientsEquiv (X : Variety k) : X.Cycle ≃+ (X.toScheme →₀ ℤ) whe
       supportWithinDomain' := Set.subset_univ _
       supportLocallyFiniteWithinDomain' := by
         intro x _hx
-        exact ⟨Set.univ, Filter.univ_mem, by simpa using f.finite_support⟩ }
+        refine ⟨Set.univ, Filter.univ_mem, ?_⟩
+        rw [Set.univ_inter]
+        exact f.finite_support }
   left_inv c := by
     apply ext
     intro x
@@ -83,6 +85,7 @@ lemma lift_single (f : X.toScheme → A) (x : X.toScheme) (n : ℤ) :
     lift f (single x n) = n • f x := by
   change Finsupp.liftAddHom _ (coefficientsEquiv X (single x n)) = _
   rw [coefficientsEquiv_single, Finsupp.liftAddHom_apply_single]
+  rfl
 
 @[simp]
 lemma lift_single_one (f : X.toScheme → A) (x : X.toScheme) :
