@@ -30,3 +30,4 @@ import LeanVarieties.CycleDecomposition
 import LeanVarieties.CycleDirectSum
 import LeanVarieties.CycleSupport
 import LeanVarieties.CycleEffectiveDecomposition
+import LeanVarieties.CycleUniversalProperty

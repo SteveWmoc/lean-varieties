@@ -52,6 +52,8 @@ The library currently provides:
   effective addition takes unions of supports without cancellation. Every cycle
   has a unique difference presentation by effective cycles with disjoint
   coefficient supports; positive and negative parts preserve codimension.
+  The cycle group is additively equivalent to finitely supported integer
+  functions, and every assignment on generators extends uniquely to an additive map.
 
 Projectivity means admitting a closed immersion over the base into some finite
 projective space; it implies properness. Fixed dimension uses mathlib's
@@ -132,6 +134,7 @@ All module names below have the prefix `LeanVarieties.`.
 | [CycleDirectSum](LeanVarieties/CycleDirectSum.lean) | Additive direct-sum equivalence with homogeneous cycle subgroups |
 | [CycleSupport](LeanVarieties/CycleSupport.lean) | Closed geometric support and effective addition without cancellation |
 | [CycleEffectiveDecomposition](LeanVarieties/CycleEffectiveDecomposition.lean) | Canonical positive and negative parts, uniqueness, support, and codimension |
+| [CycleUniversalProperty](LeanVarieties/CycleUniversalProperty.lean) | Finite coefficient equivalence and unique additive extension from generators |
 
 ## Documentation and checks
 
