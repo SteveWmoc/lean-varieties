@@ -31,7 +31,7 @@ def coefficientsEquiv (X : Variety k) : X.Cycle ≃+ (X.toScheme →₀ ℤ) whe
         intro x _hx
         refine ⟨Set.univ, Filter.univ_mem, ?_⟩
         rw [Set.univ_inter]
-        exact f.finite_support }
+        exact f.hasFiniteSupport }
   left_inv c := by
     apply ext
     intro x
